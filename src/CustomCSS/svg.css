@@ -1,0 +1,47 @@
+.cls-1 {
+   fill: #1070FF;
+ }
+
+ .cls-2 {
+   fill: #1b1b1b;
+ }
+
+ .cls-3 {
+   fill: #1a1a1a;
+ }
+
+ .cls-4 {
+   fill: #534d57;
+ }
+
+ .cls-22 {
+  fill: none;
+}
+
+.iconSize {
+   height: 28px;
+}
+
+.logoSize {
+   height: 23px;
+}
+
+.loaderIcon {
+  height: 100px;
+  width: 100px;
+  animation: Loader 1.5s ease-in-out forwards infinite;
+}
+
+@keyframes Loader {
+  0% {
+    transform: rotateZ(0deg);
+    scale: 1;
+  }
+  50% {
+    scale: 1.2;
+  }
+  100% {
+    transform: rotateZ(360deg);
+    scale: 1;
+  }
+}

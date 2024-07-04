@@ -1,0 +1,64 @@
+.gradientBackgroundTop {
+   height: 450px;
+   width: 100%;
+   position: absolute;
+   background: linear-gradient(180deg , #8aadff , #EDF2FA);
+}
+
+.button-bg {
+   background: linear-gradient(90deg , #90b1ff , #6d99ff);
+}
+
+.button-bg:hover {
+   background: linear-gradient(90deg , #5f8fff , #2d6cff);
+}
+
+.slider-container {
+   width: 100%;
+   height: 450px;
+}
+
+.slider-container2 {
+   width: 100%;
+   height: 400px;
+}
+
+ .slick-dots li.slick-active button:before {
+   opacity: 1 !important;
+   color: #7B8CDE !important;
+ }
+ 
+ .messageBox {
+   box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.1);
+ }
+
+.secondElementBackground {
+   background: linear-gradient(45deg, #dadada 50%, transparent 50%);
+}
+
+.secondElementBackgroundInner {
+   height: 250px;
+   width: 250px;
+   rotate: 90deg;
+   background: linear-gradient(45deg, transparent 50%, #aaaaaa 50%);
+}
+
+.elementBoxShadow {
+   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.buttonBG {
+   background: linear-gradient(90deg , #5f8fff , #2d6cff);
+   color: white;
+}
+
+.lightLine {
+   height: 0.1px;
+   width: 80%;
+   background-color: #aaaaaa;
+}
+
+.menubar {
+   z-index: 100;
+   height: 52px !important;
+}
