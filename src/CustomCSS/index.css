@@ -25,3 +25,11 @@ code {
   min-height: 100%;
   margin: 0;
 }
+
+img, div {
+  outline: none;
+}
+
+img:focus, div:focus {
+  outline: none;
+}

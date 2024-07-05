@@ -20,7 +20,7 @@ const ReviewsSlider = () => {
       <Slider {...settings}>
         {reviews.map((rev) => (
                <ReviewCard
-                  key={rev.id} // Assuming each car has a unique id
+                  key={rev.id}
                   reviewMessage={rev.ReviewMessage}
                   pfp={rev.pfpURL}
                   rating={rev.rating}

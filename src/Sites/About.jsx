@@ -53,7 +53,7 @@ const About = () => {
                 {userToken ? (<button onClick={handleOpen} className=" w-full h-full rounded-2xl text-white font-light text-xl" style={{backgroundColor: "#1070FF"}}>Leave a review</button>) : (<button onClick={handleLoginNav} className=" w-full h-full rounded-2xl text-white font-light" style={{backgroundColor: "#1070FF"}}><span className=" font-medium">Log in</span> to leave a review</button>)}
                </div>
             </div>
-            <div className=" w-full flex flex-col bg-slate-100" style={{ height: "auto" , color: "#534D56" , borderTop: "3px solid black"}}>
+            <div className=" w-full flex flex-col bg-slate-50" style={{ height: "auto" , color: "#534D56" , borderTop: "3px solid black"}}>
         <div className=" w-full flex flex-wrap" style={{ height: "250px"}}>
           <div className=" w-1/2 h-full flex flex-col  p-5">
             <span className=" font-semibold" style={{ fontSize: "17px"}}>DriveMotors</span>

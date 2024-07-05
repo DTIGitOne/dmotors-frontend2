@@ -24,6 +24,7 @@ const User = () => {
    const [loading, setLoading] = useState(false);
    const [usersAccount, setUsersAccount] = useState(false);
    const [changingBio, setChangingBio] = useState(false);
+   const [usersCar, setUsersCar] = useState(false);
    const token = localStorage.getItem('authorization');
    const [ isAdmin , setIsAdmin] = useState(false);
    const { id } = useParams();
@@ -37,7 +38,6 @@ const User = () => {
       slidesToScroll: 1,
    };
    
-
    const idtoken = getIdToken();
 
    const editingBio = (e) => {
@@ -114,7 +114,6 @@ const User = () => {
          dispatch(setVisible(true));
          dispatch(setOpenMessages(true));
          
-         // Set the receiver ID to open the chat
       } catch (e) {
          console.log(e.response);
       }

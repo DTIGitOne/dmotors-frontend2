@@ -20,6 +20,17 @@ export const findCars = async (searchVehicle) => {
   }
 };
 
+export const getCar = async (id, token) => {
+   try {
+      const headers = token ? { Authorization: `Bearer ${token}` } : {};
+      const response = await axiosInstance.get(`/cars/${id}`, { headers });
+      return response;
+   } catch (e) {
+      console.error(e);
+      throw e;
+   }
+}
+
 export const sendImage = async (formData , token , id) => {
    try {
       const response = await axiosInstance.patch(`/users/profile/update/${id}`, formData, {headers: {
@@ -99,6 +110,21 @@ export const getUser = async (id) => {
    } catch(e) {
       console.log(e.response);
       return  e.resonse
+   }
+}
+
+export const deleteCar = async (id, token) => {
+   try {
+      const response = await axiosInstance.delete(`/cars/delete/${id}`, {
+         headers: {
+            Authorization: `Bearer ${token}`
+         }
+      });
+
+      return response;
+   } catch(e) {
+      console.log(e);
+      return e.response;
    }
 }
 

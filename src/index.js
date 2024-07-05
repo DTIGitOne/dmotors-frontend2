@@ -25,6 +25,7 @@ import UserInformation from './Sites/UserInformation';
 import DeleteUser from './Sites/DeleteUser';
 import AdminMain from './Sites/Admin';
 import AdminUsers from './Sites/AdminUsers';
+import CarDetails from './Sites/CarDetails';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -38,6 +39,7 @@ root.render(
       <Route path="/users/:id" element={<User />} />
       <Route path="/VerifyGmail/:userId" element={<VerifyGmail />} />
       <Route path="/AdvancedSearch" element={<AdvancedSearch />} />
+      <Route path="/cars/:carId" element={<CarDetails />} />
       <Route path='*' element={<Navigate to="/" />} />
       <Route path="/Admin/Main" element={
           <AdminRoute>

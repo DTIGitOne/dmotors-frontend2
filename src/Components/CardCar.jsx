@@ -11,7 +11,7 @@ const CardCar = ({brand , model , image , date , power , gearbox , mileage , fue
    const navigate = useNavigate();
 
    const openVehicle = (carId) => {
-      //navigate(`/cars/${carId}`); 
+      navigate(`/cars/${carId}`);
    };
 
    return (
@@ -49,7 +49,7 @@ const CardCar = ({brand , model , image , date , power , gearbox , mileage , fue
             <div className=" text-2xl flex justify-center items-center font-semibold mb-1" style={{ height: "10%"}}>
                {price} €
             </div>
-            <Button onClick={openVehicle(id)} sx={{ fontWeight: 700 , color: "#0066FF"}}>View</Button>
+            <Button onClick={() => openVehicle(id)} sx={{ fontWeight: 700 , color: "#0066FF"}}>View</Button>
          </div>
       </div>
       </div>
