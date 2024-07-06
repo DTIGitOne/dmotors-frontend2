@@ -62,10 +62,10 @@ const CarTypeInput = () => {
     const vehicle = {
       Brand: selectedBrand?.title,
       Model: selectedModel?.model,
-      Year: selectedYear ? parseInt(selectedYear, 10) : undefined, // Correct radix value
-      Milage: milageValue ? parseInt(milageValue, 10) : undefined, // Correct radix value
-      minPrice: minPrice ? parseInt(minPrice, 10) : undefined, // Correct radix value
-      maxPrice: maxPrice ? parseInt(maxPrice, 10) : undefined, // Correct radix value
+      Year: selectedYear ? parseInt(selectedYear, 10) : undefined, 
+      Milage: milageValue ? parseInt(milageValue, 10) : undefined, 
+      minPrice: minPrice ? parseInt(minPrice, 10) : undefined,
+      maxPrice: maxPrice ? parseInt(maxPrice, 10) : undefined, 
     };
 
     const filteredVehicle = Object.fromEntries(Object.entries(vehicle).filter(([_, v]) => v != null));

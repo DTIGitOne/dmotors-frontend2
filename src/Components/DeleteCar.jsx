@@ -5,9 +5,9 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate, useParams } from 'react-router-dom';
-import { deleteCar } from '../API/API';
+import { deleteCar, deleteCarAdmin } from '../API/API';
 import { CircularProgress } from '@mui/material';
-import { getIdToken } from '../functions/getTokenPayload';
+import { getIdToken, getRoleToken } from '../functions/getTokenPayload';
 
 const style = {
   position: 'absolute',
@@ -26,27 +26,55 @@ const style = {
   const handleClose = () => setOpen(false);
   const [loading, setLoading] = React.useState(false);
   const [carDeleted, setCarDeleted] = React.useState("");
+  const [admin, setAdmin] = React.useState(false);
   const token = localStorage.getItem('authorization');
+  const role = getRoleToken();
   const idToken = getIdToken();
 
   const navigate = useNavigate();
 
+  React.useEffect(() => {
+    if (role === "ADMIN") {
+       setAdmin(true)
+    } else {
+       setAdmin(false);
+    }
+   }, []);
+
   const handleDelete = async () => {
      setLoading(true)
-     try {
-       const response = await deleteCar(CarId, token);
-
-       if(response.status === 200) {
-         setCarDeleted("Listing deleted")
-
-         setTimeout(() => {
-            navigate(`/users/${idToken}`);
-         }, 1500);
-       }
-     } catch(e) {
-       console.log(e);
-     } finally {
-       setLoading(false);
+     if (admin === true) {
+      try {
+        const response = await deleteCarAdmin(CarId, token);
+ 
+        if(response.status === 200) {
+          setCarDeleted("Listing deleted")
+ 
+          setTimeout(() => {
+             navigate(`/users/${idToken}`);
+          }, 1500);
+        }
+      } catch(e) {
+        console.log(e);
+      } finally {
+        setLoading(false);
+      }
+     } else {
+      try {
+        const response = await deleteCar(CarId, token);
+ 
+        if(response.status === 200) {
+          setCarDeleted("Listing deleted")
+ 
+          setTimeout(() => {
+             navigate(`/users/${idToken}`);
+          }, 1500);
+        }
+      } catch(e) {
+        console.log(e);
+      } finally {
+        setLoading(false);
+      }
      }
   }
 

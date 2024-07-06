@@ -6,11 +6,13 @@
 html {
   margin: 0;
   height: 100%;
+  width: 100%;
 }
 
 body {
   margin: 0;
   height: 100%;
+  width: 100%;
   font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -23,6 +25,7 @@ code {
 
 #root {
   min-height: 100%;
+  width: 100%;
   margin: 0;
 }
 

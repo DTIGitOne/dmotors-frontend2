@@ -9,20 +9,25 @@ import Messages from "../Components/Messages";
 import ReviewCard from "../Components/ReviewCard";
 import ReviewsSlider from "../Components/ReviewsSlider";
 import DMotorsLogo from "../SVG/DMotorsLogo";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { scrollToSection } from "../Constants/constants";
 import { getIdToken, getRoleToken } from "../functions/getTokenPayload";
-import { findCars, getRecommended, getReviews } from "../API/API";
+import { findCars, getCarNumber, getRecommended, getReviews } from "../API/API";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCars, setCars } from "../Redux/Slices/carDataSlice";
 import { setReviews } from "../Redux/Slices/Reviews";
 import { setExpanded, setVisible } from "../Redux/Slices/MessageExpandedSlice";
 import { setIsLogged } from "../Redux/Slices/User";
 import { setPfp } from "../Redux/Slices/User";
+import { setPageNumber } from "../Redux/Slices/PageSlice";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
    const idtoken = getIdToken();
    const currentYear = new Date().getFullYear();
+
+   const [carsNumber, setCarsNumber] = useState("");
+   const [loading, setLoading] = useState(false);
 
    const searchRef = useRef(null);
    const recomendedRef = useRef(null);
@@ -32,8 +37,25 @@ const Main = () => {
    
    const dispatch = useDispatch();
 
+   const navigate = useNavigate();
+
+   const redirectAbout = () => {
+      navigate(`/About`);
+   }
+
+   const redirectContact = () => {
+      navigate(`/Contact`);
+   }
+
+   const getCars = async () => {
+      const response = await getCarNumber();
+
+      setCarsNumber(response.data.totalCars);
+   }
+
     useEffect(() => {
       window.scrollTo(0, 0);
+      getCars();
     }, []);
 
    useEffect(() => {
@@ -49,37 +71,39 @@ const Main = () => {
     useEffect(() => {
       const fetchAndSetCars = async () => {
         try {
+          setLoading(true);
           const cars = await getRecommended(token);
           const reviews = await getReviews();
           dispatch(setCars(cars));
           dispatch(setReviews(reviews.data));
         } catch (error) {
           console.error('Error in useEffect:', error);
+        } finally {
+          setLoading(false);
         }
       };
   
       fetchAndSetCars();
     }, [dispatch]);
 
-
-    const handleRandom = async () => {
-      try {
-        const response = await findCars({});
-
-        console.log(response);
-      } catch(e) {
-        console.log(e);
-      }
-    }
-
     const openMessages = () => {
       dispatch(setExpanded(true));
       dispatch(setVisible(true));
     }
 
+    const handleSearch = async () => {
+      dispatch(setPageNumber(1));
+  
+      navigate(`/Search/Results?`);
+    };
+
    return (
       <>
-      <div className="w-full flex flex-col items-center bg-slate-100">
+      {loading ? (
+        <div className=" h-screen w-screen flex justify-center items-center"><LoaderIcon /></div>
+      ) : (
+        <>
+         <div className="w-full flex flex-col items-center bg-slate-100">
       <div className=" h-10"></div>
        <MenuBar />
        <div ref={searchRef} className=" w-full flex justify-center " style={{ height: '800px' , marginTop: '1%'}}>
@@ -116,7 +140,7 @@ const Main = () => {
               <span className="text-center">Look through all and choose the best option:</span>
             </div>
             <div className=" w-full flex justify-center items-center">
-              <button onClick={handleRandom} className=" buttonBG p-4 rounded-2xl font-semibold">459,345 Vehicles avaible</button>
+              <button onClick={handleSearch} className=" buttonBG p-4 rounded-2xl font-semibold">{carsNumber} Vehicles avaible</button>
             </div>
           </div>
           </div>
@@ -137,8 +161,8 @@ const Main = () => {
              <span className=" font-semibold" style={{ fontSize: "17px"}}>Website</span>
             <div className="mt-4 flex flex-col gap-2 select-none">
              <div className=" cursor-pointer" onClick={() => scrollToSection(searchRef)}>Main Page</div>
-             <div className=" cursor-pointer">About us</div>  
-             <div className=" cursor-pointer">Contact</div>
+             <div className=" cursor-pointer" onClick={redirectAbout}>About us</div>  
+             <div className=" cursor-pointer" onClick={redirectContact}>Contact</div>
             </div>
           </div>
         </div>
@@ -156,6 +180,8 @@ const Main = () => {
        </div> 
       </div>
       <Messages userId={idtoken} />
+        </>
+      )}
       </>
    );
 }

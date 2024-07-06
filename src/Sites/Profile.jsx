@@ -1,9 +1,9 @@
 import MenuBar from "../Components/MenuBar";
 import { useEffect, useState } from "react";
-import { getUser, sendImage } from "../API/API";
+import { getUser, sendImage, sendImageAdmin } from "../API/API";
 import LoaderIcon from "../SVG/LoaderIcon";
 import CardCar from "../Components/CardCar";
-import { getIdToken } from "../functions/getTokenPayload";
+import { getIdToken, getRoleToken } from "../functions/getTokenPayload";
 import Messages from "../Components/Messages";
 import '../CustomCSS/Profile.css';
 import { createChat } from "../API/API";
@@ -27,6 +27,7 @@ const User = () => {
    const [usersCar, setUsersCar] = useState(false);
    const token = localStorage.getItem('authorization');
    const [ isAdmin , setIsAdmin] = useState(false);
+   const [ Admin, setAdmin] = useState(false);
    const { id } = useParams();
 
    const settings = {
@@ -41,6 +42,16 @@ const User = () => {
    };
    
    const idtoken = getIdToken();
+
+   useEffect(() => {
+      const adminRole = getRoleToken();
+
+      if (adminRole === "ADMIN" && isAdmin === false && idtoken !== id) {
+         setAdmin(true);
+      } else {
+         setAdmin(false);
+      }
+   }, []);
 
    const editingBio = (e) => {
       setChangingBio(true);
@@ -62,12 +73,23 @@ const User = () => {
     }, [id]);
 
    const submit = async () => {
-
-      const formData = new FormData();
-      formData.append("image", file);
-      formData.append("bio", bio);
-      await sendImage(formData, token , id);
-      await getUserData();
+      if(Admin === true) {
+         const formData = new FormData();
+         formData.append("image", file);
+         if (bio !== "undefined" && bio !== undefined && bio !== "") {
+            formData.append("bio", bio);
+           }
+         await sendImageAdmin(formData, token , id);
+         await getUserData();
+      } else {
+         const formData = new FormData();
+         formData.append("image", file);
+         if (bio !== "undefined" && bio !== undefined && bio !== "") {
+          formData.append("bio", bio);
+         }
+         await sendImage(formData, token , id);
+         await getUserData();
+      }
    };
 
    const dispatch = useDispatch();
@@ -141,7 +163,7 @@ const User = () => {
                         <div className=" relative flex justify-center items-center w-36 ml-6 h-full">
                            <div className=" relative h-36 w-36 rounded-full object-cover overflow-hidden" style={{ border: "2px solid #534D56" }}>
                               {user && <img className=" object-cover w-full h-full" src={user.pfp} alt="Profile Picture" />}
-                              {usersAccount ? (
+                              {usersAccount || Admin ? (
                                  <form onSubmit={submit}>
                                   <input id="file" className=" editBackdrop z-50 absolute " onChange={e => setFile(e.target.files[0])} type="file" name="image" accept="image/*" />
                                  </form>
@@ -149,7 +171,7 @@ const User = () => {
                                  <></>
                               )}
                            </div>
-                            {usersAccount ? (
+                            {usersAccount || Admin ? (
                            <div className=" flex justify-center items-center h-8 w-8 rounded-full absolute z-50 right-3 bottom-3" style={{backgroundColor: "#1070FF"}}><ModeEditIcon style={{color: "#ffffff"}}/></div>
                             ) : (
                               <></>
@@ -175,11 +197,11 @@ const User = () => {
                        <button className="text-red-500" onClick={closeSubmit}>Cancel</button>
                       </div>
                      ) : (
-                      usersAccount ? "Edit Info:" : "Info:"
+                      usersAccount || Admin ? "Edit Info:" : "Info:"
                      )}
                      </div>
                         <div className="w-full h-full font-light" style={{ wordWrap: "break-word" }}>
-                           {usersAccount ? (
+                           {usersAccount || Admin ? (
                               <form className=" w-full mt-2" style={{ height: "85%"}}>
                                 <textarea maxLength={190} value={bio} name="bio" className=" bg-slate-100 h-full w-full" onChange={(e) => editingBio(e)}></textarea>
                               </form>
@@ -195,7 +217,7 @@ const User = () => {
                      <p className="text-4xl font-semibold">Listings</p>
                      <div className=" relative mt-4 h-2/5 w-full">
                         <Slider {...settings}>
-                     {cars ? (
+                     {cars.length > 0 ? (
                         cars.map((car) => (
                            <CardCar
                               key={car.id} // Assuming each car has a unique id
@@ -212,7 +234,7 @@ const User = () => {
                            />
                         ))
                      ) : (
-                        <div>No listings</div>
+                        <div className=" text-center text-2xl">No listings</div>
                      )}
                      </Slider>               
                      </div>

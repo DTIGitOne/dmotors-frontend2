@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import MenuBar from "../Components/MenuBar";
 import axios from 'axios';
 import LoaderIcon from "../SVG/LoaderIcon";
+import { AdminUsersCall } from "../API/API";
+import UsersCard from "../Components/UsersCard";
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 const AdminUsers = () => {
    const [users, setUsers] = useState([]);
@@ -13,7 +17,7 @@ const AdminUsers = () => {
       setLoading(true);
       try {
          const token = localStorage.getItem('authorization');
-         const response = await AdminUsers(page, token);
+         const response = await AdminUsersCall(page, token);
          
          setUsers(response.data.users);
          setTotalPages(response.data.totalPages);
@@ -44,21 +48,29 @@ const AdminUsers = () => {
    return (
       <>
          <MenuBar />
-         <div className="h-16"></div>
-         <div className="h-screen w-screen bg-slate-100 flex flex-col items-center">
+         <div className="w-full" style={{height: "5vh"}}></div>
+         <div className=" h-auto w-screen bg-slate-100 flex flex-col items-center" style={{minHeight: "95vh"}}>
             {loading ? (
                <div><LoaderIcon /></div>
             ) : (
-               <div>
-                  <ul>
-                     {users.map(user => (
-                        <li key={user._id}>{user.username}</li>
-                     ))}
-                  </ul>
-                  <div className="pagination">
-                     <button onClick={handlePreviousPage} disabled={currentPage === 1}>Previous</button>
-                     <span>Page {currentPage} of {totalPages}</span>
-                     <button onClick={handleNextPage} disabled={currentPage === totalPages}>Next</button>
+               <div className=" mt-10 w-full flex flex-col items-center gap-8">
+                  {users.map(user => (
+                     <UsersCard key={user._id} id={user._id} image={user.pfpURL} name={user.name} surname={user.surname} username={user.username} email={user.email} roles={user.role}/>
+                  ))}
+                  <div className="pagination mb-5">
+                     <button style={{ backgroundColor: "#1070FF" }} className='p-1 text-white mr-3 rounded-xl' onClick={handlePreviousPage} disabled={currentPage === 1}><NavigateBeforeIcon /></button>
+                     <span>
+                        {Array.from({ length: totalPages }, (_, index) => (
+                           <span
+                              key={index + 1}
+                              className=" font-semibold m-1 text-xl"
+                              style={{ color: currentPage === index + 1 ? "#1070FF" : "#000000" }}
+                           >
+                              {index + 1}
+                           </span>
+                        ))}
+                     </span>
+                     <button  style={{ backgroundColor: "#1070FF" }} className='p-1 text-white ml-3 rounded-xl'  onClick={handleNextPage} disabled={currentPage === totalPages}><NavigateNextIcon /></button>
                   </div>
                </div>
             )}

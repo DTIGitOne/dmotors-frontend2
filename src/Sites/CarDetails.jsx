@@ -8,7 +8,7 @@ import '../CustomCSS/CarDetails.css';
 import { useDispatch } from "react-redux";
 import { setExpanded, setOpenMessages, setVisible } from "../Redux/Slices/MessageExpandedSlice";
 import Messages from "../Components/Messages";
-import { getIdToken } from "../functions/getTokenPayload";
+import { getIdToken, getRoleToken } from "../functions/getTokenPayload";
 import CarMainDetails from "../Components/CarMainDetails";
 import CarSecondDetails from "../Components/CarSecondDetails";
 import DeleteCar from "../Components/DeleteCar";
@@ -20,6 +20,7 @@ const CarDetails = () => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
 
+   const [admin, setAdmin] = useState(false);
    const [loading, setLoading] = useState(false);
    const [images, setImages] = useState([]);
    const [brand, setBrand] = useState("");
@@ -75,6 +76,7 @@ const CarDetails = () => {
    const token = localStorage.getItem('authorization');
    const currentYear = new Date().getFullYear();
    const tokenId = getIdToken();
+   const role = getRoleToken();
 
    const handleCreateChat = async () => {
       try {
@@ -99,6 +101,12 @@ const CarDetails = () => {
 
    useEffect(() => {
       window.scrollTo(0, 0);
+
+      if (role === "ADMIN") {
+         setAdmin(true)
+      } else {
+         setAdmin(false);
+      }
      }, []);
 
    const getCarFunc = async () => {
@@ -177,7 +185,7 @@ const CarDetails = () => {
          <div className="bg-slate-100 w-full h-auto flex flex-col items-center justify-center">
             <MenuBar />
             <div ref={ImagePreviewRef} style={{ height: "52px" }}></div>
-            {usersCar ? (<div className=" w-full"><DeleteCar CarId={carId} /></div>) : (null)}
+            {usersCar || admin ? (<div className=" w-full"><DeleteCar CarId={carId} /></div>) : (null)}
             <div className="w-full h-auto flex flex-col mb-4 bg-white">
                <PreviewSlider images={images} />
             </div>

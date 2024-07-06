@@ -15,6 +15,18 @@ const About = () => {
    const [userToken, setUserToken] = useState(false);
 
    const navigate = useNavigate();
+
+   const redirectMain = () => {
+    navigate(`/Main`);
+  }
+
+  const redirectAbout = () => {
+    navigate(`/About`);
+  }
+
+  const redirectContact = () => {
+     navigate(`/Contact`);
+  }
    
    useEffect(() => {
     window.scrollTo(0, 0);
@@ -65,9 +77,9 @@ const About = () => {
           <div className=" w-1/2 h-full flex flex-col p-5">
              <span className=" font-semibold" style={{ fontSize: "17px"}}>Website</span>
             <div className="mt-4 flex flex-col gap-2 select-none">
-             <div className=" cursor-pointer">Main Page</div>
+             <div className=" cursor-pointer" onClick={redirectMain}>Main Page</div>
              <div className=" cursor-pointer" onClick={() => scrollToSection(AboutRef)}>About us</div>  
-             <div className=" cursor-pointer">Contact</div>
+             <div className=" cursor-pointer" onClick={redirectContact}>Contact</div>
             </div>
           </div>
         </div>

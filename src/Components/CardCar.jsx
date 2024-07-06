@@ -6,19 +6,37 @@ import TransmitionTypeIcon from "../SVG/TransmitionTypeIcon";
 import { Button } from "@mui/material";
 import "../CustomCSS/Card.css"
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setResultLoading } from "../Redux/Slices/PageSlice";
+import { useState } from "react";
+import LoaderIcon from "../SVG/LoaderIcon";
 
 const CardCar = ({brand , model , image , date , power , gearbox , mileage , fuel , price , id}) => {
+   const [imageLoaded, setImageLoaded] = useState(false);
+
    const navigate = useNavigate();
 
    const openVehicle = (carId) => {
       navigate(`/cars/${carId}`);
    };
 
+   const dispatch = useDispatch();
+
+   const handleImageLoad = () => {
+      setImageLoaded(true);
+      dispatch(setResultLoading(false));
+  };
+
+  const handleImageStartLoading = () => {
+      dispatch(setResultLoading(true));
+  };
+
    return (
       <div className=" h-full w-full flex justify-center items-center mb-4">
          <div className="cardBox flex flex-col bg-white">
          <div className=" h-1/2 w-full">
-           <img className=" h-full w-full object-cover" src={image} alt="https://www.seat.com.mt/content/dam/public/seat-website/carworlds/compare/default-image/ghost.png" />      
+           <img className=" h-full w-full object-cover" onLoad={handleImageLoad} style={{ display: imageLoaded ? 'block' : 'none' }} onLoadStart={handleImageStartLoading} src={image} alt="https://www.seat.com.mt/content/dam/public/seat-website/carworlds/compare/default-image/ghost.png" />   
+           {!imageLoaded && <div className=" h-full w-full flex justify-center items-center p-24"><LoaderIcon /></div>}
          </div>
          <div className=" h-full w-full flex flex-col p-2">
             <div className=" flex justify-center items-center text-xl font-semibold" style={{ height: "15%"}}>

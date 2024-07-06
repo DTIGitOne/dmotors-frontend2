@@ -42,6 +42,34 @@ export const sendImage = async (formData , token , id) => {
    }
 };
 
+export const sendImageAdmin = async (formData , token , id) => {
+   try {
+      const response = await axiosInstance.patch(`/admin/profile/update/${id}`, formData, {headers: {
+         'Content-Type': 'multipart/form-data',
+         'authorization': `Bearer ${token}`, 
+      },});
+      return response.data;
+   } catch (e) {
+      console.log('Error uploading image:', e);
+   }
+};
+
+export const changeUserAdmin = async (id, role, username, token) => {
+   try {
+      const response = await axiosInstance.patch(`/admin/update/${id}`, 
+      { role, username }, 
+      {
+         headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${token}`, 
+         },
+      });
+      return response.data;
+   } catch (e) {
+      console.log('Error updating user:', e);
+   }
+};
+
 export const getChats = async (id , token) => {
    try {
       const response = await axiosInstance.get(`/messages/getchat/${id}`, {headers: {
@@ -87,9 +115,9 @@ export const createChat = async (id , token) => {
    }
 }
 
-export const AdminUsers = async (page, token) => {
+export const AdminUsersCall = async (page, token) => {
    try {
-      const response = await axiosInstance.get(`/admin/users?page=${page}&limit=10`, {
+      const response = await axiosInstance.get(`/admin/users?page=${page}&limit=3`, {
          headers: {
             Authorization: `Bearer ${token}`
          }
@@ -115,6 +143,32 @@ export const getUser = async (id) => {
 export const deleteCar = async (id, token) => {
    try {
       const response = await axiosInstance.delete(`/cars/delete/${id}`, {
+         headers: {
+            Authorization: `Bearer ${token}`
+         }
+      });
+
+      return response;
+   } catch(e) {
+      console.log(e);
+      return e.response;
+   }
+}
+
+export const getCarNumber = async () => {
+   try {
+      const response = axiosInstance.get(`/cars/get/number`);
+
+      return response;
+   } catch(e) {
+      console.log(e.response);
+      return e.response
+   }
+}
+
+export const deleteCarAdmin = async (id, token) => {
+   try {
+      const response = await axiosInstance.delete(`/admin/delete/${id}`, {
          headers: {
             Authorization: `Bearer ${token}`
          }
@@ -186,8 +240,8 @@ export const deleteUser = async (id , token) => {
       },});
       return response;
    } catch (e) {
-      return e.response;
       console.log('Error getting user:', e.response);
+      return e.response;
    }
 };
 
