@@ -4,140 +4,140 @@ import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import { useState } from 'react';
 import { brandNames } from '../Data/Brands';
 import { brandModels } from '../Data/BrandModels';
-import { OutlinedInput , InputLabel , InputAdornment} from '@mui/material';
+import { OutlinedInput, InputLabel, InputAdornment } from '@mui/material';
 import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
 import { yearRange } from '../Constants/constants';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { findCars } from '../API/API';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setPageNumber } from '../Redux/Slices/PageSlice';
 
-//Brand
+// Brand
 const filterOptions = createFilterOptions({
-   matchFrom: 'start',
-   stringify: (option) => option.title,
+  matchFrom: 'start',
+  stringify: (option) => option.title,
 });
 
 const CarTypeInput = () => {
-   const [selectedBrand, setSelectedBrand] = useState(""); // Brand
-   const [selectedModel, setSelectedModel] = useState(undefined); // Model
-   const [filteredModels, setFilteredModels] = useState([]); // Filtered Models
-   const [selectedYear, setSelectedYear] = useState(undefined); // Year
-   const [milageValue , setMileageValue] = useState(undefined); // Mileage
-   const [minPrice , setMinPrice] = useState(undefined);
-   const [maxPrice , setMaxPrice] = useState(undefined);
+  const [selectedBrand, setSelectedBrand] = useState(''); // Brand
+  const [selectedModel, setSelectedModel] = useState(undefined); // Model
+  const [filteredModels, setFilteredModels] = useState([]); // Filtered Models
+  const [selectedYear, setSelectedYear] = useState(undefined); // Year
+  const [milageValue, setMileageValue] = useState(undefined); // Mileage
+  const [minPrice, setMinPrice] = useState(undefined);
+  const [maxPrice, setMaxPrice] = useState(undefined);
 
-   const handleYearChange = (event) => {
+  const handleYearChange = (event) => {
     setSelectedYear(event.target.value);
-   };
- 
-   // Brand
-   const handleBrandChange = (event, newValue) => {
-     setSelectedBrand(newValue);
-     setSelectedModel(null); // Reset selected model when brand changes
-     if (newValue) {
-       const brandModel = brandModels.find(brand => brand.id === newValue.id);
-       setFilteredModels(brandModel ? brandModel.models : []);
-     } else {
-       setFilteredModels([]);
-     }
-   };
- 
-   const handleModelChange = (event , newValue) => {
-     setSelectedModel(newValue);
-   }
-   
-   //showSeries
-   const validBrandIds = new Set([3, 5, 6, 7, 8,31 ,41 ,63]);
+  };
 
-   //Search
+  const dispatch = useDispatch();
 
-   const handleSearch = async () => {
+  // Brand
+  const handleBrandChange = (event, newValue) => {
+    setSelectedBrand(newValue);
+    setSelectedModel(null); // Reset selected model when brand changes
+    if (newValue) {
+      const brandModel = brandModels.find((brand) => brand.id === newValue.id);
+      setFilteredModels(brandModel ? brandModel.models : []);
+    } else {
+      setFilteredModels([]);
+    }
+  };
 
+  const handleModelChange = (event, newValue) => {
+    setSelectedModel(newValue);
+  };
+
+  const navigate = useNavigate();
+
+  // Show series
+  const validBrandIds = new Set([3, 5, 6, 7, 8, 31, 41, 63]);
+
+  // Search
+  const handleSearch = async () => {
     const vehicle = {
       Brand: selectedBrand?.title,
       Model: selectedModel?.model,
-      Year: selectedYear ? parseInt(selectedYear, 2000) : undefined,
-      Milage: milageValue ? parseInt(milageValue, 0) : undefined,
-      minPrice: minPrice ? parseInt(minPrice, 0) : undefined,
-      maxPrice: maxPrice ? parseInt(maxPrice, 0) : undefined
+      Year: selectedYear ? parseInt(selectedYear, 10) : undefined, // Correct radix value
+      Milage: milageValue ? parseInt(milageValue, 10) : undefined, // Correct radix value
+      minPrice: minPrice ? parseInt(minPrice, 10) : undefined, // Correct radix value
+      maxPrice: maxPrice ? parseInt(maxPrice, 10) : undefined, // Correct radix value
     };
 
-    console.log(vehicle);
-    
     const filteredVehicle = Object.fromEntries(Object.entries(vehicle).filter(([_, v]) => v != null));
-    
-    try {
-      const searchParams = await findCars(filteredVehicle);
-      console.log(searchParams);
-    } catch (e) {
-      console.error('Search error:', e);
-    }
-    
-   }
 
-   return (
-     <>
-       <Autocomplete
-         id="filter-demo"
-         options={brandNames}
-         getOptionLabel={(option) => option.title}
-         filterOptions={filterOptions}
-         onChange={handleBrandChange}
-         sx={{ width: "100%" , fontFamily: "Poppins", fontWeight: 500 , mt: "10px"}}
-         renderInput={(params) => <TextField {...params}  label="Brand" />}
-       />
- 
-       <Autocomplete
-         id="grouped-demo"
-         options={filteredModels}
-         groupBy={(option) => (selectedBrand && validBrandIds.has(selectedBrand.id)) ? option.series : null}
-         disabled={!selectedBrand}
-         value={selectedModel}
-         onChange={handleModelChange}
-         getOptionLabel={(option) => option.model}
-         sx={{ width: "100%" , fontFamily: "Poppins",}}
-         renderInput={(params) => <TextField {...params}  label="Model" />}
-       />
+    const searchParams = new URLSearchParams(filteredVehicle).toString();
 
-       <FormControl fullWidth sx={{ mt: 0 }}>
-         <InputLabel id="demo-simple-select-label">Year</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={selectedYear}
-            label="Year"
-            onChange={handleYearChange}
-       >
-           <MenuItem value={undefined}>
-              <em>Any</em>
-           </MenuItem>
-              {yearRange.map((year) => (
-                <MenuItem key={year} value={year}>
-                    {year}
-                </MenuItem>
-              ))}
-          </Select>
-        </FormControl>
+    dispatch(setPageNumber(1));
 
-        <FormControl sx={{ width: "100%" }} variant="outlined">
-          <OutlinedInput
-            id="outlined-adornment-weight"
-            endAdornment={<InputAdornment position="end">Km</InputAdornment>}
-            aria-describedby="outlined-weight-helper-text"
-            type='number'
-            value={milageValue}
-            onChange={(e) => setMileageValue(e.target.value)}
+    navigate(`/Search/Results?${searchParams}`);
+  };
+
+  return (
+    <>
+      <Autocomplete
+        id="filter-demo"
+        options={brandNames}
+        getOptionLabel={(option) => option.title}
+        filterOptions={filterOptions}
+        onChange={handleBrandChange}
+        sx={{ width: '100%', fontFamily: 'Poppins', fontWeight: 500, mt: '10px' }}
+        renderInput={(params) => <TextField {...params} label="Brand" />}
+      />
+
+      <Autocomplete
+        id="grouped-demo"
+        options={filteredModels}
+        groupBy={(option) => (selectedBrand && validBrandIds.has(selectedBrand.id)) ? option.series : null}
+        disabled={!selectedBrand}
+        value={selectedModel}
+        onChange={handleModelChange}
+        getOptionLabel={(option) => option.model}
+        sx={{ width: '100%', fontFamily: 'Poppins' }}
+        renderInput={(params) => <TextField {...params} label="Model" />}
+      />
+
+      <FormControl fullWidth sx={{ mt: 0 }}>
+        <InputLabel id="demo-simple-select-label">Year</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={selectedYear}
+          label="Year"
+          onChange={handleYearChange}
+        >
+          <MenuItem value={undefined}>
+            <em>Any</em>
+          </MenuItem>
+          {yearRange.map((year) => (
+            <MenuItem key={year} value={year}>
+              {year}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
+      <FormControl sx={{ width: '100%' }} variant="outlined">
+        <OutlinedInput
+          id="outlined-adornment-weight"
+          endAdornment={<InputAdornment position="end">Km</InputAdornment>}
+          aria-describedby="outlined-weight-helper-text"
+          type="number"
+          value={milageValue}
+          onChange={(e) => setMileageValue(e.target.value)}
         />
-        <FormHelperText id="outlined-weight-helper-text" sx={{ width: "100%" , fontFamily: "Poppins",}}>Mileage</FormHelperText>
+        <FormHelperText id="outlined-weight-helper-text" sx={{ width: '100%', fontFamily: 'Poppins' }}>
+          Mileage
+        </FormHelperText>
+      </FormControl>
 
-        </FormControl> 
-
-       <div className=' h-14 w-full flex justify-center items-center font-semibold'>
-
+      <div className="h-14 w-full flex justify-center items-center font-semibold">
         Price:
-
-       <FormControl fullWidth sx={{ m: 1 }}>
+        <FormControl fullWidth sx={{ m: 1 }}>
           <InputLabel htmlFor="outlined-adornment-amount">From</InputLabel>
           <OutlinedInput
             id="outlined-adornment-amount"
@@ -146,9 +146,7 @@ const CarTypeInput = () => {
             onChange={(e) => setMinPrice(e.target.value)}
           />
         </FormControl>
-
         To:
-
         <FormControl fullWidth sx={{ m: 1 }}>
           <InputLabel htmlFor="outlined-adornment-amount"></InputLabel>
           <OutlinedInput
@@ -157,14 +155,13 @@ const CarTypeInput = () => {
             onChange={(e) => setMaxPrice(e.target.value)}
           />
         </FormControl>
+      </div>
 
-       </div>
+      <button onClick={handleSearch} className="h-14 w-full button-bg rounded-2xl text-white">
+        Search
+      </button>
+    </>
+  );
+};
 
-       <button onClick={handleSearch} className=' h-14 w-full button-bg rounded-2xl text-white'>Search</button>
-       <button className=' text-blue-700 cursor-pointer' style={{ fontSize: "14px"}}>Advanced Search</button>
-     </>
-   );
- };
- 
- export default CarTypeInput;
- 
+export default CarTypeInput;

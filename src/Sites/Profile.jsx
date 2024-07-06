@@ -30,12 +30,14 @@ const User = () => {
    const { id } = useParams();
 
    const settings = {
-      dots: true,
+      dots: false,
       infinite: cars.length > 1,
       speed: 400,
       arrows: false,
       slidesToShow: 1,
       slidesToScroll: 1,
+      autoplaySpeed: 3500,
+      autoplay: true,
    };
    
    const idtoken = getIdToken();

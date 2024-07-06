@@ -24,7 +24,7 @@ export const vehicleOptions = [
    "solar Roof", "advanced Airbag System", "high Beam Assist", "anti Theft System", "power Trunk", "performance Brakes", 
    "sport Suspension", "winter Package", "towing Package", "technology Package", "luxury Package", "park Assist", 
    "rain Sensing Wipers", "auto Dimming Rearview Mirror", "driver Assistance Package", "push Button Start", "power Adjustable Seats", 
-   "Roll Cage", "After Market Body, wireless Phone Charging, voice Recognition System", "traffic Sign Recognition", 
+   "Roll Cage", "After Market Body", "wireless Phone Charging, voice Recognition System", "traffic Sign Recognition", 
    "steering Wheel Heating", "parking Assistance", "lane Centering Assist", "keyless Ignition", "hill Start Assist",
    "heated Windshield", "emergency Braking Assist", "electric Parking Brake", "eco Mode", "cruise Assist", "turn Assist",
    "trailer Stability Assist", "intelligent Speed Assist"

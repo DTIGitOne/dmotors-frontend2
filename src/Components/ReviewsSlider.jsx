@@ -25,7 +25,6 @@ const ReviewsSlider = () => {
                   pfp={rev.pfpURL}
                   rating={rev.rating}
                />
-               
             ))}
       </Slider>
     </div>

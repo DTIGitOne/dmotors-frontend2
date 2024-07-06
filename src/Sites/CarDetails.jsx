@@ -32,6 +32,7 @@ const CarDetails = () => {
    const [year, setYear] = useState("");
    const [power, setPower] = useState("");
    const [gearbox, setGearbox] = useState("");
+   const [price, setPrice] = useState(0);
    const [mileage, setMileage] = useState("");
    const [fuel, setFuel] = useState("");
    const [condition, setCondition] = useState("");
@@ -148,6 +149,7 @@ const CarDetails = () => {
                   setInterior(car.Interior);
                   setCarOptions(car.CarOptions);
                   setCarBio(car.AditionalBio);
+                  setPrice(car.Price);
                }
             } catch (e) {
                console.log(e);
@@ -157,7 +159,8 @@ const CarDetails = () => {
          }
       } catch (e) {
          console.log(e);
-      }
+         navigate("/Main");
+      } 
    };
 
    useEffect(() => {
@@ -182,6 +185,9 @@ const CarDetails = () => {
                <span className="text-xl font-light">{brand}</span>
                <span className="text-xl font-medium ml-1">{model}</span>
                <span className="text-xl ml-1 font-medium">{userTittle ? userTittle : null}</span>
+            </div>
+            <div className="w-full py-4 px-3 mb-3 bg-white rounded-t-md">
+               <span className="text-xl font-semibold">{price.toLocaleString()} €</span>
             </div>
             <div ref={ProfileSectionRef} className="bg-white mt-5 w-full h-32 flex">
                <div className="w-1/3 flex justify-center items-center">

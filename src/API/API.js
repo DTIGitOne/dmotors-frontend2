@@ -2,22 +2,21 @@ import { elastic } from "react-burger-menu";
 import axiosInstance from "./axios"
 
 export const findCars = async (searchVehicle) => {
-  try {
-     const lowerCaseSearchVehicle = Object.fromEntries(
-        Object.entries(searchVehicle).map(([key, value]) => [key, typeof value === 'string' ? value.toLowerCase() : value])
-     );
+   try {
+       const lowerCaseSearchVehicle = Object.fromEntries(
+           Object.entries(searchVehicle).map(([key, value]) => [key, typeof value === 'string' ? value : value])
+       );
 
-     const queryString = Object.keys(lowerCaseSearchVehicle)
-        .map(key => `${key}=${encodeURIComponent(lowerCaseSearchVehicle[key])}`)
-        .join('&');
+       const queryString = Object.keys(lowerCaseSearchVehicle)
+           .map(key => `${key}=${encodeURIComponent(lowerCaseSearchVehicle[key])}`)
+           .join('&');
 
-     const response = await axiosInstance.get(`/cars/search?${queryString}`);
-     console.log('Cars found:', response.data);
-     return response.data.cars; 
-  } catch (error) {
-     console.error('Error finding cars:', error.response ? error.response.data : error.message);
-     throw error; 
-  }
+       const response = await axiosInstance.get(`/cars/search?${queryString}`);
+       return response.data; // Expecting `{ cars: [...], total: number }`
+   } catch (error) {
+       console.error('Error finding cars:', error.response ? error.response.data : error.message);
+       throw error;
+   }
 };
 
 export const getCar = async (id, token) => {

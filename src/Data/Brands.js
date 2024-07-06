@@ -15,7 +15,7 @@ export const brandNames = [
    { title: "Dodge", id: 14, value: "dodge" },
    { title: "Donkervoort", id: 15, value: "donkervoort" },
    { title: "DS", id: 16, value: "ds" },
-   { title: "Ferrari", id: 17, value: "ferarri" },
+   { title: "Ferrari", id: 17, value: "ferrari" },
    { title: "Fiat", id: 18, value: "fiat" },
    { title: "Fisker", id: 19, value: "fisker" },
    { title: "Ford", id: 20, value: "ford" },

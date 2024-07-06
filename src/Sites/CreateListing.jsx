@@ -310,6 +310,7 @@ const User = () => {
         // Append data to formData
         if (selectedBrand) {
           formData.append('Brand', selectedBrand.title);
+          formData.append('BrandModel', selectedBrand.value);
         }
         if (selectedModel) {
           formData.append("Model", selectedModel.model);
@@ -348,6 +349,9 @@ const User = () => {
           if (firstRegistration.month && firstRegistration.year) {
             formData.append("FirstRegistration", `${firstRegistration.month}/${firstRegistration.year}`);
           }
+        } else {
+          formData.append("Registration", "Not registerd");
+          formData.append("FirstRegistration", "Never registerd");
         }
         if(category) {
           formData.append("Category", category);
@@ -412,7 +416,7 @@ const User = () => {
         formData.append('Seller', id);
 
         const requiredFields = [
-          'Brand', 'Model', 'Mileage', 'Year', 'VehicleCondition', 'Price',
+          'Brand', 'BrandModel', 'Model', 'Mileage', 'Year', 'VehicleCondition', 'Price',
           'VIN', 'Registration', 'FirstRegistration', 'Category', 'Performance',
           'DriveType', 'Fuel', 'SeatNumber', 'DoorNumber', 'PollutantClass',
           'Drivetrain', 'TransmitionType', 'Owners', 'Color', 'Interior',

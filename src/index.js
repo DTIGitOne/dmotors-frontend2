@@ -26,6 +26,7 @@ import DeleteUser from './Sites/DeleteUser';
 import AdminMain from './Sites/Admin';
 import AdminUsers from './Sites/AdminUsers';
 import CarDetails from './Sites/CarDetails';
+import SearchResults from './Sites/SearchResults';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -40,6 +41,7 @@ root.render(
       <Route path="/VerifyGmail/:userId" element={<VerifyGmail />} />
       <Route path="/AdvancedSearch" element={<AdvancedSearch />} />
       <Route path="/cars/:carId" element={<CarDetails />} />
+      <Route path="/Search/Results" element={<SearchResults />} />
       <Route path='*' element={<Navigate to="/" />} />
       <Route path="/Admin/Main" element={
           <AdminRoute>
