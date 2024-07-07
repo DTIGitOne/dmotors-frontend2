@@ -7,6 +7,7 @@ import { deleteUser } from "../API/API";
 import LoaderIcon from "../SVG/LoaderIcon";
 import { useDispatch } from "react-redux";
 import { setIsLogged } from "../Redux/Slices/User";
+import '../CustomCSS/Settings.css';
 
 const DeleteUser = () => {
    const [ deleteModal , setDeleteModal] = useState(false);
@@ -50,7 +51,7 @@ const DeleteUser = () => {
               <ArrowBackIcon fontSize="large" />
             </button>
           </div>
-          <div className="bg-white rounded-3xl flex flex-col p-3 justify-between" style={{ width: "92%", height: "130px" }}>
+          <div id="delteUserSettings" className="bg-white rounded-3xl flex flex-col p-3 justify-between" style={{ height: "130px" }}>
             <div className="flex flex-col justify-center w-full h-1/2">
               <p className="font-semibold">Delete user</p>
               <p style={{ fontSize: "12px" }}>By pressing this button this account will be lost</p>
@@ -64,7 +65,7 @@ const DeleteUser = () => {
     
       {deleteModal && (
         <div className="h-screen w-screen absolute top-0 left-0 flex justify-center items-center" style={{ background: "rgba(0, 0, 0, 0.5)", zIndex: "9999" }}>
-          <div className="h-36 w-5/6 bg-white rounded-3xl flex flex-col justify-between p-4">
+          <div id="deleteModal" className="h-36 w-5/6 bg-white rounded-3xl flex flex-col justify-between p-4">
             <div className="h-1/2 w-full flex justify-center items-center">
               <p className="text-center">Are you sure you want to delete this user?</p>
             </div>

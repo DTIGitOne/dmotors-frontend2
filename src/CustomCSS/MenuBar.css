@@ -1,0 +1,54 @@
+
+#screenBar {
+   display: none;
+}
+
+.menubar {
+   z-index: 100;
+   height: 55px !important;
+}
+#screenUserItems {
+   display: none;
+}
+#userBoxMonitor {
+   display: none;
+}
+@media only screen and (min-width: 1024px) {
+   #screenBar {
+      display: flex;
+      width: 25%;
+      margin-left: 20px;
+   }
+
+   #sideBarPhone {
+      display: none;
+   }
+   
+   #profileUser {
+      width: 40px;
+      height: 40px;
+   }
+
+   #phoneMidLogo {
+      position: absolute;
+      left: 46%;
+   }
+
+   #userBoxMonitor {
+      width: 25%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+   }
+   #phoneItemsMenu {
+      display: none;
+   }
+
+   #screenUserItems {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 10px;
+      margin-right: 10px;
+   }
+ }

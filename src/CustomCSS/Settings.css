@@ -1,0 +1,24 @@
+#userInfoBoxBox {
+   width: 95%;
+}
+
+#delteUserSettings {
+   width: 92%;
+}
+
+@media only screen and (min-width: 1024px) {
+   #settingsBoxBox {
+      margin-top: 30px;
+      width: 45%;
+      gap: 13px;
+   }
+   #userInfoBoxBox {
+      width: 45%;
+   }
+   #delteUserSettings {
+      width: 40%;
+   }
+   #deleteModal {
+      width: 40%;
+   }
+}

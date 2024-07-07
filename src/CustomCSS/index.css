@@ -27,6 +27,7 @@ code {
   min-height: 100%;
   width: 100%;
   margin: 0;
+  background-color: #f1f5f9;
 }
 
 img, div {
@@ -36,3 +37,24 @@ img, div {
 img:focus, div:focus {
   outline: none;
 }
+
+::-webkit-scrollbar {
+  width: 12px; /* Width of the scrollbar */
+  height: 12px; /* Height of the scrollbar for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Background of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scrollbar thumb */
+  border-radius: 2px; /* Rounding the edges of the scrollbar thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color of the scrollbar thumb when hovered */
+}
+
+
+

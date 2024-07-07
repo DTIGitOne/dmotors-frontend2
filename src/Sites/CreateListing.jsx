@@ -485,12 +485,12 @@ const User = () => {
   };
 
    return (
-      <div>
+      <div className=" h-auto w-full flex justify-center bg-slate-100">
          <MenuBar />
          <div className="h-16"></div>
-         <div className=" w-full h-auto pb-10 bg-slate-100 flex items-center flex-col overflow-hidden">
-          <div ref={errorRef} className=" text-3xl mt-6 mb-4 ">Create a listing</div>
-          <div className=" h-auto flex items-center flex-col bg-white rounded-3xl p-4 " style={{width: "90%"}}>
+         <div id="createListingBox" className=" w-full h-auto pb-10 bg-slate-100 flex items-center flex-col overflow-hidden">
+          <div ref={errorRef} className=" text-3xl mt-24 mb-4 ">Create a listing</div>
+          <div id="listingBoxAll" className=" h-auto flex items-center flex-col bg-white rounded-3xl p-4 " style={{width: "90%"}}>
           <div className=" h-24 w-full ">
            <Autocomplete
             options={brandNames}
@@ -965,7 +965,7 @@ const User = () => {
                <label htmlFor="details">{aditionalBio ? (`${aditionalBio.length}/1000`) : (null)}</label>
              </div>
              <div className=" divsionLine mt-11"></div>
-          <div className=" w-full mt-11" style={{height: "590px"}}>
+          <div id="pictureCreateBox" className=" w-full mt-11">
           <div className=" w-full rounded-3xl" style={{height: "150px"}}>
            <div
             className={` h-full w-full z-50`}
@@ -992,7 +992,7 @@ const User = () => {
             <span className=" text-3xl text-center w-full">
                Preview
             </span>
-            <div className=" relative mt-4 h-2/5 shadow-xl rounded-xl overflow-hidden" style={{width: "105%"}}>
+            <div id="imageBoxCreate" className=" relative mt-4 h-2/5 shadow-xl rounded-xl overflow-hidden">
             {images.length > 0 ? (
              <Slider {...settings}>
               {images.map((image, index) => (

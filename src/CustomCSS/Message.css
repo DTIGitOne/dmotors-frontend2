@@ -6,6 +6,7 @@
    height: 64px;
    transition: all 0.5s ease-in-out;
    background-color: #1070FF;
+   cursor: pointer;
 }
 
 .redDot {
@@ -64,6 +65,7 @@
   font-weight: 500;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow */
   border: 1px solid rgba(255, 255, 255, 0.3);
+  cursor: default;
 }
 
 .messagesScroll {
@@ -236,8 +238,8 @@
    }
    100% {
       border-radius: 20px;
-      height: 70%;
-      width: 20%;
+      height: 85%;
+      width: 26%;
       visibility: visible;
    }
 }
@@ -245,8 +247,8 @@
 @keyframes closeMessage2 {
    0% {
       border-radius: 20px;
-      height: 70%;
-      width: 20%;
+      height: 85%;
+      width: 26%;
       visibility: visible;
    }
    100% {
@@ -300,10 +302,15 @@
 
 @media only screen and (min-width: 1024px) {
    .messageCircle.expanded {
-      animation: openMessage 0.5s ease-in-out forwards;
+      animation: openMessage2 0.5s ease-in-out forwards;
    }
    
    .messageCircle.closing {
-      animation: closeMessage 0.5s ease-in-out forwards;
+      animation: closeMessage2 0.5s ease-in-out forwards;
+   }
+   .messageCircle {
+      width: 75px;
+      height: 75px;
+      margin: 15px;
    }
  }

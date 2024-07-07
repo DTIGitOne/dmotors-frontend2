@@ -4,6 +4,7 @@ import CardCar from '../Components/CardCar';
 import { findCars } from '../API/API';
 import CircularProgress from '@mui/material/CircularProgress';
 import '../CustomCSS/Results.css';
+import styles from '../CustomCSS/CarCardCar.module.css';
 import MenuBar from '../Components/MenuBar';
 import CarTypeInput from '../Components/CarTypeInput';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
@@ -14,11 +15,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setPageNumber, setResultLoading } from '../Redux/Slices/PageSlice';
 import Messages from '../Components/Messages';
 import LoaderIcon from '../SVG/LoaderIcon';
+import { getIdToken } from '../functions/getTokenPayload';
 
 const SearchResults = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const currentYear = new Date().getFullYear();
+    const idtoken = getIdToken();
 
     const [cars, setCars] = useState([]);
     const [totalPages, setTotalPages] = useState(1);
@@ -138,9 +141,9 @@ const SearchResults = () => {
     };
 
     return (
-        <>
+        <div className=' w-full flex justify-center'>
         {resultLoading ? (<div className=" bg-white h-screen w-screen fixed top-0 left-0 flex justify-center items-center" style={{zIndex: "9999"}}><LoaderIcon /></div>) : (null)}
-        <div className='bg-slate-100 w-full h-auto pt-10 flex flex-col items-center'>
+        <div id='searchResultBox' className='bg-slate-100 w-full h-auto pt-10 flex flex-col items-center'>
             <MenuBar />
             <div style={{ height: "52px" }}></div>
             <span
@@ -178,6 +181,7 @@ const SearchResults = () => {
                             fuel={car.Fuel}
                             price={car.Price}
                             id={car._id}
+                            customClass={styles.specialCardCar}
                         />
                     ))
                 ) : (
@@ -203,7 +207,7 @@ const SearchResults = () => {
                     <NavigateNextIcon />
                 </button>
             </div>
-            <div className="w-full flex flex-col mt-10 bg-slate-50" style={{ height: "auto", color: "#534D56", borderTop: "3px solid black" }}>
+            <div id='detailsBoxItems' className="w-full flex flex-col mt-10 bg-slate-50" style={{ height: "auto", color: "#534D56", borderTop: "3px solid black" }}>
                <div className="w-full flex flex-wrap" style={{ height: "250px" }}>
                   <div className="w-1/2 h-full flex flex-col p-5">
                      <span className="font-semibold" style={{ fontSize: "17px" }}>DriveMotors</span>
@@ -232,9 +236,9 @@ const SearchResults = () => {
                   <DMotorsLogo />
                </div>
             </div>
-            <Messages />
+            <Messages userId={idtoken} />
         </div>
-        </>
+        </div>
     );
 };
 

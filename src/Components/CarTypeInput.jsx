@@ -129,6 +129,7 @@ const CarTypeInput = () => {
           type="number"
           value={milageValue}
           onChange={(e) => setMileageValue(e.target.value)}
+          inputProps={{ min: 0 }}
         />
         <FormHelperText id="outlined-weight-helper-text" sx={{ width: '100%', fontFamily: 'Poppins' }}>
           Mileage

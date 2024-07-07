@@ -56,3 +56,12 @@
    display: none;
    animation: closeAnimation 0.3s forwards, closeAnimation 0.3s 0.3s forwards;
 }
+
+@media only screen and (min-width: 1024px) {
+   #searchResultBox {
+      width: 80%;
+   }
+   #detailsBoxItems {
+      width: 100%;
+   }
+}

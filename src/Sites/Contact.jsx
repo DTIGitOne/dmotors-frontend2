@@ -3,9 +3,15 @@ import MenuBar from "../Components/MenuBar";
 import { scrollToSection } from "../Constants/constants";
 import DMotorsLogo from "../SVG/DMotorsLogo";
 import { useNavigate } from "react-router-dom";
+import Messages from "../Components/Messages";
+import '../CustomCSS/Contact.css';
+import '../CustomCSS/PageDetails.css';
+import { getIdToken } from "../functions/getTokenPayload";
 
 const Contact = () => {
    const mywebsite = process.env.REACT_APP_MYWEBSITE;
+
+   const idtoken = getIdToken();
 
    const currentYear = new Date().getFullYear();
 
@@ -29,9 +35,9 @@ const Contact = () => {
       <div>
          <MenuBar />
          <div style={{height: "5vh"}}></div>
-         <div className=" h-auto w-full flex flex-col bg-slate-100 flex flex-col" style={{height: "95vh"}}>
-            <div ref={contactRef} className=" h-screen w-screen flex flex-col items-center gap-4 p-5">
-               <h2 className=" text-center text-3xl mt-5" style={{color: "#s534D56"}}>Contact Info</h2>
+         <div className=" h-auto w-full flex flex-col  items-center bg-slate-100 flex flex-col" style={{height: "95vh"}}>
+            <div id="box1TopContact" ref={contactRef} className=" h-screen w-screen flex flex-col items-center gap-4 p-5">
+               <h2 id="boxTopTextContact" className=" text-center text-3xl mt-5" style={{color: "#s534D56"}}>Contact Info</h2>
                <div className=" bg-white rounded-2xl p-4" style={{width: "90%", letterSpacing: "0.5px"}}>
                   <p>
                      <span className=" font-semibold text-xl">T</span>his is a fake website, not meant for real use and all of the listings and information are meant to replicate a functioning website.
@@ -54,7 +60,7 @@ const Contact = () => {
                </div>
             </div>
          </div>
-         <div className=" w-full flex flex-col bg-slate-50" style={{ height: "auto" , color: "#534D56" , borderTop: "3px solid black"}}>
+         <div id="detailsBoxBox" className=" w-full flex flex-col bg-slate-50" style={{height: "auto" , color: "#534D56" , borderTop: "3px solid black"}}>
         <div className=" w-full flex flex-wrap" style={{ height: "250px"}}>
           <div className=" w-1/2 h-full flex flex-col  p-5">
             <span className=" font-semibold" style={{ fontSize: "17px"}}>DriveMotors</span>
@@ -83,6 +89,7 @@ const Contact = () => {
           <DMotorsLogo />
         </div>
        </div> 
+       <Messages userId={idtoken} />
       </div>
    );
 }

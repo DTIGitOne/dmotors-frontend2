@@ -19,3 +19,20 @@
    width: 500px;
 }
 
+@media only screen and (min-width: 1024px) {
+   #profileBox {
+      width: 80%;
+      margin-top: 30px;
+   }
+   #userDetilsBoxProfile {
+      padding: 25px;
+   }
+   #edtIconProfile {
+      right: 8px;
+      bottom: 8px;
+   }
+   #monitorBoxLitsings {
+      justify-content: flex-start;
+      margin-left: 52px;
+   }
+}

@@ -1,0 +1,15 @@
+#detailsBox1 {
+   padding: 40px;
+}
+
+#detailsBox2 {
+   padding: 40px;
+}
+
+#contactDetails {
+   padding: 40px;
+}
+
+#detailsBoxBox {
+   z-index: 900;
+}

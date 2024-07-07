@@ -17,3 +17,11 @@
    border-radius: 20px;
    overflow: hidden;
 }
+
+@media only screen and (min-width: 1024px) {
+   .reviewBox {
+      width: 350px;
+      height: 320px;
+      margin-top: 15px;
+   }
+}

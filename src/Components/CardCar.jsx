@@ -11,7 +11,7 @@ import { setResultLoading } from "../Redux/Slices/PageSlice";
 import { useState } from "react";
 import LoaderIcon from "../SVG/LoaderIcon";
 
-const CardCar = ({brand , model , image , date , power , gearbox , mileage , fuel , price , id}) => {
+const CardCar = ({brand , model , image , date , power , gearbox , mileage , fuel , price , customClass, id}) => {
    const [imageLoaded, setImageLoaded] = useState(false);
 
    const navigate = useNavigate();
@@ -32,17 +32,17 @@ const CardCar = ({brand , model , image , date , power , gearbox , mileage , fue
   };
 
    return (
-      <div className=" h-full w-full flex justify-center items-center mb-4">
+      <div className={` h-auto flex justify-center items-center mb-4 ${customClass}`}>
          <div className="cardBox flex flex-col bg-white">
-         <div className=" h-1/2 w-full">
+         <div id="imageBox" className=" h-1/2 w-full">
            <img className=" h-full w-full object-cover" onLoad={handleImageLoad} style={{ display: imageLoaded ? 'block' : 'none' }} onLoadStart={handleImageStartLoading} src={image} alt="https://www.seat.com.mt/content/dam/public/seat-website/carworlds/compare/default-image/ghost.png" />   
            {!imageLoaded && <div className=" h-full w-full flex justify-center items-center p-24"><LoaderIcon /></div>}
          </div>
          <div className=" h-full w-full flex flex-col p-2">
-            <div className=" flex justify-center items-center text-xl font-semibold" style={{ height: "15%"}}>
+            <div id="ListingNameModel" className=" flex justify-center items-center text-xl font-semibold" style={{ height: "15%"}}>
                <span className=" font-normal pr-1">{brand}</span> <p> {model}</p>
             </div>
-            <div className=" flex flex-wrap" style={{ height: "55%"}}>
+            <div id="flexWrapContainer" className=" flex flex-wrap" style={{ height: "55%"}}>
                <div className=" h-1/2 w-1/3 flex items-center gap-2">
                   <DateIcon />
                   <div className=" flex justify-center items-center w-2/3 h-1/2 p-1 bg-slate-300 rounded-xl" style={{fontSize: "12px", fontWeight: "600"}}>{date}</div>
@@ -64,7 +64,7 @@ const CardCar = ({brand , model , image , date , power , gearbox , mileage , fue
                   <div className=" flex justify-center items-center w-2/3 h-1/2 bg-slate-300 rounded-xl" style={{fontSize: "12px", fontWeight: "600"}}>{fuel}</div>
                </div>
             </div>
-            <div className=" text-2xl flex justify-center items-center font-semibold mb-1" style={{ height: "10%"}}>
+            <div id="priceCardCardText" className=" text-2xl flex justify-center items-center font-semibold mb-1" style={{ height: "10%"}}>
                {price.toLocaleString()} €
             </div>
             <Button onClick={() => openVehicle(id)} sx={{ fontWeight: 700 , color: "#0066FF"}}>View</Button>

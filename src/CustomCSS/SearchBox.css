@@ -1,0 +1,13 @@
+#searchBox {
+   width: 85%;
+}
+
+@media only screen and (min-width: 1024px) {
+   #searchBox {
+      width: 40%;
+      padding: 40px;
+   }
+   #boxText {
+      font-size: 30px;
+   }
+ }

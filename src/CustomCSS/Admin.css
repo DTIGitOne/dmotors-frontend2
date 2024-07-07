@@ -1,0 +1,16 @@
+#usernameEdit {
+   outline: none;
+}
+
+#adminUsers {
+   width: 95%;
+}
+
+@media only screen and (min-width: 1024px) {
+ #adminUsers {
+    width: 40%;
+ }
+ #adminUsersBoxBox {
+   width: 40%;
+ }
+}

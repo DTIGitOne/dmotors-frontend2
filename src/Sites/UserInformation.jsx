@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
 import LoaderIcon from '../SVG/LoaderIcon';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import '../CustomCSS/Settings.css';
 
 const UserInformation = () => {
    const { id } = useParams();
@@ -133,7 +134,7 @@ const UserInformation = () => {
          <div className="h-16 w-full"></div>
          <div className=' w-full flex items-center mb-4 pl-2' style={{height: "40px"}}><button onClick={() => navigate('/settings')}><ArrowBackIcon fontSize='large'/></button></div>
          <div className="h-auto w-full flex flex-col justify-center items-center">
-            <div className="bg-white rounded-3xl p-3 pt-9 shadow-lg" style={{ width: "95%", height: "700px" }}>
+            <div id='userInfoBoxBox' className="bg-white rounded-3xl p-3 pt-9 shadow-lg" style={{height: "700px" }}>
                <div className="w-full" style={{height: "83px"}}>
                   <TextField className="w-full" helperText="Cannot change" disabled={true} label="Name" value={name} variant="filled" />
                </div>

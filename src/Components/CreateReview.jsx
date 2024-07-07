@@ -80,7 +80,7 @@ const CreateReview = ({ open, handleClose }) => {
             <Button onClick={handleClose}>Go back</Button>
          </div>
        ) : (
-         <div className=' rounded-3xl flex gap-1 flex-col items-center justify-center p-4 absolute top-1/2 left-1/2 w-4/5 bg-white' style={{transform: "translate(-50%, -50%)",height: "480px"}}>
+         <div id='createReviewBox' className=' rounded-3xl flex gap-1 flex-col items-center justify-center p-4 absolute top-1/2 left-1/2 w-4/5 bg-white' style={{transform: "translate(-50%, -50%)",height: "480px"}}>
            {errorMsg ? (<h1 className=' text-2xl mb-3 text-red-500'>{errorMsg}</h1>) : (<h1 className=' text-2xl mb-3'>Create a review</h1>)}
            <p className=' w-full'>Review:</p>
            <textarea maxLength={100} className=' my-2 bg-slate-100 w-full' style={{height: "40%"}} value={reviewInput} onChange={(e) => setReviewInput(e.target.value)} id="reviewInput"></textarea>

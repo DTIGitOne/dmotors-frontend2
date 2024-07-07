@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Slider from 'react-slick';
-import { Modal, Box } from '@mui/material';
+import { Modal, Box, useMediaQuery } from '@mui/material';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import ImageIcon from '@mui/icons-material/Image';
@@ -10,6 +10,8 @@ const PreviewSlider = ({ images }) => {
    const [selectedImageIndex, setSelectedImageIndex] = useState(0);
    const sliderRef = useRef(null);
    const modalSliderRef = useRef(null);
+
+   const isLargeScreen = useMediaQuery('(min-width: 1024px)');
 
    const handleOpen = (index) => {
       setSelectedImageIndex(index);
@@ -29,7 +31,7 @@ const PreviewSlider = ({ images }) => {
       slidesToShow: 1,
       arrows: false,
       slidesToScroll: 1,
-      autoplay: true,
+      autoplay: true, // Always autoplay for main slider
       autoplaySpeed: 3000,
       pauseOnHover: true,
       pauseOnFocus: true,
@@ -38,33 +40,28 @@ const PreviewSlider = ({ images }) => {
 
    const modalSettings = {
       ...settings,
+      autoplay: false,  // No autoplay for modal
       initialSlide: selectedImageIndex,
       afterChange: current => setSelectedImageIndex(current),
    };
 
-   const handleBeforeChange = () => {
-      if (sliderRef.current) {
-         sliderRef.current.slickPause();
-      }
-   };
-
-   const handleAfterChange = (current) => {
-      if (sliderRef.current) {
+   // Restart autoplay for main slider when modal closes
+   useEffect(() => {
+      if (!open && sliderRef.current) {
          sliderRef.current.slickPlay();
       }
-      setSelectedImageIndex(current);
-   };
+   }, [open]);
 
    return (
-      <div className='relative'>
-         <div className='absolute z-50 right-0 top-6'>
+      <div id='pictureBoxBox' className='relative'>
+         <div id='slidenumber' className='absolute z-50 right-0 top-6'>
             <div className='h-4 w-auto pl-2 p-5 rounded-l-lg justify-center items-center text-white flex' style={{background: "rgba(0,0,0, 0.6)"}}>
-               <ImageIcon /><div className='ml-1'>{images.length}</div>
+               <ImageIcon /><div className='ml-1'>{selectedImageIndex + 1} / {images.length}</div>
             </div>
          </div>
-         <Slider {...settings} ref={sliderRef} beforeChange={handleBeforeChange} afterChange={handleAfterChange}>
+         <Slider {...settings} ref={sliderRef}>
             {images.map((image, index) => (
-               <div key={index} style={{ outline: 'none' }}>
+               <div key={index} id='imageSliderId' style={{ outline: 'none' }}>
                   <img
                      src={image}
                      alt={`Slide ${index}`}
@@ -88,7 +85,7 @@ const PreviewSlider = ({ images }) => {
                   top: '50%',
                   left: '50%',
                   transform: 'translate(-50%, -50%)',
-                  width: '100%',
+                  width: isLargeScreen ? '60%' : '100%',
                   boxShadow: 24,
                   p: 0,
                   overflow: 'hidden',

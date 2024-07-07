@@ -175,6 +175,10 @@ const CarDetails = () => {
       getCarFunc();
    }, []);
 
+   useEffect(() => {
+      window.scrollTo(0, 0);
+     }, []);
+
    const handleProfile = (id) => {
       navigate(`/users/${id}`);
    };
@@ -182,25 +186,42 @@ const CarDetails = () => {
    return (
       <>
          {loading ? (<div className=" h-screen w-screen bg-white fixed flex justify-center items-center" style={{zIndex: "9999"}}><LoaderIcon /></div>) : (null)}
-         <div className="bg-slate-100 w-full h-auto flex flex-col items-center justify-center">
+         <div className="bg-slate-100 w-full h-full flex flex-col items-center justify-center">
             <MenuBar />
             <div ref={ImagePreviewRef} style={{ height: "52px" }}></div>
-            {usersCar || admin ? (<div className=" w-full"><DeleteCar CarId={carId} /></div>) : (null)}
-            <div className="w-full h-auto flex flex-col mb-4 bg-white">
+            {usersCar || admin ? (<div id="deleteCarButton" className=" w-full"><DeleteCar CarId={carId} /></div>) : (null)}
+            <div id="picturesBoxDetails" className="w-full h-auto flex flex-col mb-4 bg-white">
                <PreviewSlider images={images} />
+               <div id="monitorUser" ref={ProfileSectionRef} className="bg-white mt-5 w-full h-full justify-center items-center flex flex-col">
+               <div className=" flex">
+                <div className="w-1/2 flex justify-center items-center">
+                 <div className="relative h-20 w-20 rounded-full object-cover overflow-hidden" style={{ border: "2px solid #534D56" }}>
+                  <img onClick={() => handleProfile(userId)} className=" cursor-pointer h-full w-full object-cover" src={userImage} alt="" />
+                 </div>
+                </div>
+                <div className="pl-2 w-1/2 flex flex-col justify-center">
+                 <span className="text-xl">{username}</span>
+                </div>
+               </div>
+               <div>
+                <div className=" w-full">
+                  {usersCar ? (<div className=" h-10"></div>) : (<button className="msgButton" onClick={handleCreateChat}>Message</button>)}
+                </div>
+               </div>
             </div>
-            <div className="w-full py-4 px-2 mt-1 mb-3 bg-white rounded-t-md">
+            </div>
+            <div className=" nameAndPriceWidthMonitor w-full py-4 px-2 mt-1 mb-3 bg-white rounded-t-md">
                <span className="text-xl font-light">{brand}</span>
                <span className="text-xl font-medium ml-1">{model}</span>
                <span className="text-xl ml-1 font-medium">{userTittle ? userTittle : null}</span>
             </div>
-            <div className="w-full py-4 px-3 mb-3 bg-white rounded-t-md">
+            <div id="priceSection" className=" nameAndPriceWidthMonitor w-full py-4 px-3 mb-3 bg-white rounded-t-md">
                <span className="text-xl font-semibold">{price.toLocaleString()} €</span>
             </div>
-            <div ref={ProfileSectionRef} className="bg-white mt-5 w-full h-32 flex">
+            <div id="mobileUserSection" ref={ProfileSectionRef} className="bg-white mt-5 w-full h-32 flex">
                <div className="w-1/3 flex justify-center items-center">
                   <div className="relative h-24 w-24 rounded-full object-cover overflow-hidden" style={{ border: "2px solid #534D56" }}>
-                     <img onClick={() => handleProfile(userId)} className="h-full w-full object-cover" src={userImage} alt="" />
+                     <img onClick={() => handleProfile(userId)} className=" h-full w-full object-cover" src={userImage} alt="" />
                   </div>
                </div>
                <div className="pl-2 w-2/3 flex flex-col justify-center">
@@ -210,10 +231,10 @@ const CarDetails = () => {
                   </div>
                </div>
             </div>
-            <div className="mt-5 bg-white rounded-2xl" style={{width: "91%"}}>
+            <div id="mainDetilsBox" className="mt-5 bg-white rounded-2xl">
                <CarMainDetails date={year} power={power} gearbox={gearbox} mileage={mileage} fuel={fuel} />
             </div>
-            <div ref={VehicleDetailsRef} className="mt-5 bg-white rounded-2xl" style={{width: "91%"}}>
+            <div id="secondDetilsBox" ref={VehicleDetailsRef} className="mt-5 bg-white rounded-2xl">
                <CarSecondDetails 
                Brand={brand} 
                Model={model} 
@@ -238,7 +259,7 @@ const CarDetails = () => {
                Interior={interior}
                />
             </div>
-            <div ref={AditionalOptionsRef} className="mt-16 bg-white rounded-2xl" style={{width: "91%"}}>
+            <div id="thirdOptions" ref={AditionalOptionsRef} className="mt-16 bg-white rounded-2xl" >
             <h3 className=" p-4 pb-2 font-medium text-white rounded-t-lg" style={{backgroundColor: "#1070FF"}}>Aditional options:</h3>
             {carOptions.map((options, index) => (
              <div key={options}>
@@ -252,7 +273,7 @@ const CarDetails = () => {
              </div>
             ))}
             </div>
-            <div ref={AditionalInfoRef} className=" bg-white mt-16 mb-16 rounded-2xl" style={{width: "91%"}}>
+            <div ref={AditionalInfoRef} id="aditionalInfoBox" className=" bg-white mt-16 mb-16 rounded-2xl" >
                <h2 className=" text-3xl p-4" style={{color: "#1070FF"}}>Aditional info</h2>
                <div className=" w-full h-auto p-4" style={{minHeight: "250px"}}>{carBio ? (carBio) : ("No aditional info provided")}</div>
             </div>

@@ -1,0 +1,17 @@
+
+@media only screen and (min-width: 1024px) {
+   #aboutUsText {
+      font-size: 50px;
+   }
+   #aboutUsBox {
+      width: 35%;
+      margin-top: 15px;
+   }
+   #createReviewBox {
+      width: 30%;
+   }
+   #createReviewBoxBox {
+      width: 38%;
+   }
+}
+

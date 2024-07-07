@@ -20,6 +20,7 @@ const Messages = ({ userId , receiverId}) => {
    const [messages, setMessages] = useState([]);
    const [userLogged, setUserLogged] = useState(false);
    const [receiver, setReceiver] = useState(null);
+   const [isScreenLarge, setIsScreenLarge] = useState(window.matchMedia("(min-width: 1024px)").matches);
 
    const open = useSelector((state) => state.messageopen.expanded);
    const contentVisible = useSelector((state) => state.messageopen.contentVisible);
@@ -42,15 +43,33 @@ const Messages = ({ userId , receiverId}) => {
    }, [receiverId]);
 
    useEffect(() => {
-      if (open) {
-         document.body.style.overflow = 'hidden';
-      } else {
-         document.body.style.overflow = '';
-      }
+      const mediaQuery = window.matchMedia("(min-width: 1024px)");
+      const handleMediaChange = () => setIsScreenLarge(mediaQuery.matches);
+  
+      // Initial check
+      handleMediaChange();
+  
+      // Add listener
+      mediaQuery.addListener(handleMediaChange);
+  
+      // Clean up listener on unmount
       return () => {
-         document.body.style.overflow = '';
+        mediaQuery.removeListener(handleMediaChange);
       };
-   }, [open]);
+    }, []);
+  
+    useEffect(() => {
+      if (!isScreenLarge) {
+        if (open) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = '';
+        }
+        return () => {
+          document.body.style.overflow = '';
+        };
+      }
+    }, [open, isScreenLarge]);
 
    const token = localStorage.getItem('authorization');
 
@@ -184,11 +203,11 @@ const Messages = ({ userId , receiverId}) => {
                      <div className='w-full flex justify-center flex-col' style={{ height: "94%" }}>
                       {userLogged ? (
                         openMessages ? (
-                         <div className=' w-full h-full relative overflow-y-scroll overflow-x-hidden'>
+                         <div className=' w-full h-full relative overflow-y-auto overflow-x-hidden'>
                           <div className=' topBackBox h-11 w-full absolute flex items-center pl-1'>
                            <button className=' flex items-center justify-center' onClick={() => dispatch(setOpenMessages(false))}><GoBackIcon />Go back </button>
                           </div>
-                           <div className=' h-full w-full flex flex-col justify-end box-border'>
+                           <div className=' cursor-default h-full w-full flex flex-col justify-end box-border'>
                               <div className=' overflow-y-auto flex-col p-2 mt-12'>
                               {messages.map((msg, index) => (
                                 <div className="messageContainer" key={index}>
@@ -214,8 +233,8 @@ const Messages = ({ userId , receiverId}) => {
                          </div>
                      ) : (
                         <>
-                         <div className='h-12 w-full text-white flex justify-center items-center text-3xl mb-2'>Messages</div>
-                         <div className=' h-full flex flex-col gap-1'>
+                         <div className=' cursor-default h-12 w-full text-white flex justify-center items-center text-3xl mb-2'>Messages</div>
+                         <div id='userChatDisplayBox' className=' cursor-default h-full flex flex-col gap-1'>
                          {userProfiles.map((profile , index) => (
                           <div className=' gap-2 w-full flex items-center flex-col' key={profile._id}>
                            <div className=' messageBoxes h-20 flex relative'>

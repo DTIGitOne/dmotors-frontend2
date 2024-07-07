@@ -1,0 +1,58 @@
+#secondDetilsBox {
+   width: 91%;
+}
+#mainDetilsBox {
+   width: 91%;
+}
+
+#thirdOptions {
+   width: 91%;
+}
+#monitorUser {
+   display: none;
+}
+#aditionalInfoBox {
+   width: 91%;
+}
+
+@media only screen and (min-width: 1024px) {
+   #secondDetilsBox {
+      width: 50%;
+   }
+   #mainDetilsBox {
+      width: 50%;
+   }
+   #thirdOptions {
+      width: 50%;
+   }
+   #monitorUser {
+      display: flex;
+   }
+   #mobileUserSection {
+      display: none;
+   }
+   #picturesBoxDetails {
+      width: 50%;
+      flex-direction: row;
+   }
+   #imageSliderId {
+      width: 100% !important;
+   }
+   #pictureBoxBox {
+      width: 75%;
+   }
+   #deleteCarButton {
+      width: 50%;
+      cursor: pointer;
+   }
+   .nameAndPriceWidthMonitor {
+      width: 50%;
+   }
+   #aditionalInfoBox {
+      width: 50%;
+   }
+   #priceSection {
+      text-align: center;
+      color: #1070FF;
+   }
+}

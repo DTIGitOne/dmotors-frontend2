@@ -73,3 +73,26 @@
   font-size: 1.5rem;
   color: #a0aec0;
 }
+
+#pictureCreateBox {
+  height: 590px;
+}
+
+#imageBoxCreate {
+  width: 105%;
+}
+
+@media only screen and (min-width: 1024px) {
+  #createListingBox {
+    width: 60%;
+  }
+  #listingBoxAll {
+    padding: 40px;
+  }
+  #pictureCreateBox {
+    width: 70%;
+  }
+  #imageBoxCreate {
+    width: 80%;
+  }
+}

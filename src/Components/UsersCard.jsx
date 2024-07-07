@@ -93,7 +93,7 @@ const UsersCard = ({name, surname, username, email, image, roles, id}) => {
          <div className=" w-2/3 p-1" style={{fontSize: "13px"}}>
           <div className=' overflow-x-auto bg-slate-300 w-full h-1/4 p-2'><span className=' font-semibold'>name:</span> {name}</div>
           <div className=' overflow-x-auto w-full h-1/4 p-2'><span className=' font-semibold'>surname:</span> {surname}</div>
-          <div className=' overflow-x-auto bg-slate-300 w-full h-1/4 p-2 flex items-center'><span className=' font-semibold'>username:</span> <input disabled={intialRole === "ADMIN"} maxLength={18} className=' w-full ml-1 bg-transparent' value={usernameInput} onChange={(e) => setUsernameInput(e.target.value)} /></div>
+          <div className=' overflow-x-auto bg-slate-300 w-full h-1/4 p-2 flex items-center'><span className=' font-semibold'>username:</span> <input id='usernameEdit' disabled={intialRole === "ADMIN"} maxLength={18} className=' w-full ml-1 bg-transparent' value={usernameInput} onChange={(e) => setUsernameInput(e.target.value)} /></div>
           <div className=' overflow-x-auto w-full h-1/4 p-2 flex'><span className=' font-semibold'>email:</span><span className=' ml-1'>{email}</span></div>
          </div>
          </div>
