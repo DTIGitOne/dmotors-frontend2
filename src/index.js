@@ -9,7 +9,6 @@ import About from './Sites/About';
 import Contact from './Sites/Contact';
 import User from './Sites/Profile';
 import CreateListing from './Sites/CreateListing';
-import AdvancedSearch from './Sites/AdvancedSearch';
 import SignUp from './Sites/SignUp';
 import LogIn from './Sites/LogIn';
 import ResetPassword from './Sites/ResetPassword';
@@ -39,7 +38,6 @@ root.render(
       <Route path="/Contact" element={<Contact />} />
       <Route path="/users/:id" element={<User />} />
       <Route path="/VerifyGmail/:userId" element={<VerifyGmail />} />
-      <Route path="/AdvancedSearch" element={<AdvancedSearch />} />
       <Route path="/cars/:carId" element={<CarDetails />} />
       <Route path="/Search/Results" element={<SearchResults />} />
       <Route path='*' element={<Navigate to="/" />} />

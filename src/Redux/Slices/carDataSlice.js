@@ -3,11 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 const carDataSlice = createSlice({
    name: "cardata",
    initialState: {
-      cars: [], // Store cars as an array
+      cars: [], 
    },
    reducers: {
       setCars: (state, action) => {
-         // Use the payload directly as it should be an array of cars
          return {
             ...state,
             cars: action.payload,

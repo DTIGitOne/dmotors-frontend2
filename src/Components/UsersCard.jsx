@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { changeUserAdmin } from '../API/API';
-import { getRoleToken } from '../functions/getTokenPayload';
 
 const UsersCard = ({name, surname, username, email, image, roles, id}) => {
    const [intialRole, setIntialRole] = useState(roles);

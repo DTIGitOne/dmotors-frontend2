@@ -17,7 +17,7 @@
   transition: opacity 0.5s ease, visibility 0.5s ease;
   opacity: 0;
   visibility: hidden;
-  z-index: 998; /* Adjusted so that it is behind the sidebar */
+  z-index: 998; 
 }
 
 .sidebarBackdrop.open {

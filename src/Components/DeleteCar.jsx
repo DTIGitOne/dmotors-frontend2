@@ -1,10 +1,9 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { deleteCar, deleteCarAdmin } from '../API/API';
 import { CircularProgress } from '@mui/material';
 import { getIdToken, getRoleToken } from '../functions/getTokenPayload';

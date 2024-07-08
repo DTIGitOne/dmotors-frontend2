@@ -1,5 +1,3 @@
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useEffect, useState } from 'react';
 import StarIcon from '../SVG/StarIcon';
@@ -30,7 +28,7 @@ const CreateReview = ({ open, handleClose }) => {
    const emptyColor = "#002D71";
  
    const handleRatingClick = (index) => {
-     setRating(index + 1); // index is zero-based, so add 1
+     setRating(index + 1); 
    };
  
    const starColors = Array(totalStars).fill(emptyColor).map((color, index) => {

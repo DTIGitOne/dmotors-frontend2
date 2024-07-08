@@ -39,22 +39,29 @@ img:focus, div:focus {
 }
 
 ::-webkit-scrollbar {
-  width: 12px; /* Width of the scrollbar */
-  height: 12px; /* Height of the scrollbar for horizontal scrollbars */
+  width: 12px; 
+  height: 12px; 
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Background of the scrollbar track */
+  background: #f1f1f1; 
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888; /* Color of the scrollbar thumb */
-  border-radius: 2px; /* Rounding the edges of the scrollbar thumb */
+  background: #888; 
+  border-radius: 2px; 
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Color of the scrollbar thumb when hovered */
+  background: #555; 
 }
-
+@media only screen and (min-width: 1024px) {
+  #forgotBoxBox {
+    width: 25%;
+  }
+  #verifyGmailBox {
+    width: 25%;
+  }
+}
 
 

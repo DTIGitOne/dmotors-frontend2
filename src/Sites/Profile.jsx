@@ -6,7 +6,6 @@ import CardCar from "../Components/CardCar";
 import { getIdToken, getRoleToken } from "../functions/getTokenPayload";
 import Messages from "../Components/Messages";
 import '../CustomCSS/Profile.css';
-import { createChat } from "../API/API";
 import { useDispatch } from "react-redux";
 import { setExpanded, setOpenMessages, setVisible } from "../Redux/Slices/MessageExpandedSlice";
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
@@ -20,11 +19,9 @@ const User = () => {
   const [bioBefore , setBioBefore] = useState();
   const [user, setUser] = useState(null); 
   const [cars, setCars] = useState([]);
-  const [singleCar, setSingleCar] = useState(false);
   const [loading, setLoading] = useState(false);
   const [usersAccount, setUsersAccount] = useState(false);
   const [changingBio, setChangingBio] = useState(false);
-  const [usersCar, setUsersCar] = useState(false);
   const token = localStorage.getItem('authorization');
   const [ isAdmin , setIsAdmin] = useState(false);
   const [ Admin, setAdmin] = useState(false);
@@ -233,23 +230,22 @@ const User = () => {
               <p className="text-4xl font-semibold">Listings</p>
               <div className=" relative mt-4 h-2/5 w-full">
                 {windowWidth >= 1024 ? (
-                  // Render without slider for desktop view
                   <div className=' w-full flex justify-center'>
                      <div id='monitorBoxLitsings' className="flex flex-wrap justify-center gap-4">
                     {cars.length > 0 ? (
                       cars.map((car) => (
                         <CardCar
-                          key={car.id} // Assuming each car has a unique id
+                          key={car.id} 
                           brand={car.Brand}
                           model={car.Model}
-                          image={car.CarImages[0]} // Adjust as per your API response structure
+                          image={car.CarImages[0]} 
                           date={car.Year}
                           power={car.Performance}
                           gearbox={car.TransmitionType}
                           mileage={car.Mileage}
                           fuel={car.Fuel}
                           price={car.Price}
-                          id={car._id} // Assuming _id is the unique identifier
+                          id={car._id} 
                         />
                       ))
                     ) : (
@@ -258,22 +254,21 @@ const User = () => {
                   </div>
                   </div>
                 ) : (
-                  // Render with slider for mobile view
                   <Slider {...settings}>
                     {cars.length > 0 ? (
                       cars.map((car) => (
                         <CardCar
-                          key={car.id} // Assuming each car has a unique id
+                          key={car.id} 
                           brand={car.Brand}
                           model={car.Model}
-                          image={car.CarImages[0]} // Adjust as per your API response structure
+                          image={car.CarImages[0]} 
                           date={car.Year}
                           power={car.Performance}
                           gearbox={car.TransmitionType}
                           mileage={car.Mileage}
                           fuel={car.Fuel}
                           price={car.Price}
-                          id={car._id} // Assuming _id is the unique identifier
+                          id={car._id}
                         />
                       ))
                     ) : (

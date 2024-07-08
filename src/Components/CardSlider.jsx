@@ -20,17 +20,17 @@ const CardSlider = () => {
          <Slider {...settings}>
             {cars.map((car) => (
                <CardCar
-                  key={car.id} // Assuming each car has a unique id
+                  key={car.id} 
                   brand={car.Brand}
                   model={car.Model}
-                  image={car.CarImages[0]} // Adjust as per your API response structure
+                  image={car.CarImages[0]} 
                   date={car.Year}
                   power={car.Performance}
                   gearbox={car.TransmitionType}
                   mileage={car.Mileage}
                   fuel={car.Fuel}
                   price={car.Price}
-                  id={car._id} // Assuming _id is the unique identifier
+                  id={car._id} 
                />
             ))}
          </Slider>

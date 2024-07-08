@@ -1,5 +1,4 @@
 import DMotorsLogo from "../SVG/DMotorsLogo";
-import MenuLogo from "../SVG/MenuLogo";
 import UserIcon from "../SVG/UserIcon";
 import SideBar from "./SideBar";
 import { ScrollToTopComponent } from "../Constants/constants";

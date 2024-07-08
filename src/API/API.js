@@ -1,4 +1,3 @@
-import { elastic } from "react-burger-menu";
 import axiosInstance from "./axios"
 
 export const findCars = async (searchVehicle) => {
@@ -12,7 +11,7 @@ export const findCars = async (searchVehicle) => {
            .join('&');
 
        const response = await axiosInstance.get(`/cars/search?${queryString}`);
-       return response.data; // Expecting `{ cars: [...], total: number }`
+       return response.data;
    } catch (error) {
        console.error('Error finding cars:', error.response ? error.response.data : error.message);
        throw error;

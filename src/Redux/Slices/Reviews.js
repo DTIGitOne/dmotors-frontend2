@@ -7,7 +7,6 @@ const reviewSlice = createSlice({
   },
   reducers: {
    setReviews: (state, action) => {
-      // Use the payload directly as it should be an array of cars
       return {
          ...state,
          reviews: action.payload,

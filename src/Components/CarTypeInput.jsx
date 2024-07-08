@@ -10,7 +10,6 @@ import FormHelperText from '@mui/material/FormHelperText';
 import { yearRange } from '../Constants/constants';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import { findCars } from '../API/API';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setPageNumber } from '../Redux/Slices/PageSlice';
@@ -39,7 +38,7 @@ const CarTypeInput = () => {
   // Brand
   const handleBrandChange = (event, newValue) => {
     setSelectedBrand(newValue);
-    setSelectedModel(null); // Reset selected model when brand changes
+    setSelectedModel(null); 
     if (newValue) {
       const brandModel = brandModels.find((brand) => brand.id === newValue.id);
       setFilteredModels(brandModel ? brandModel.models : []);

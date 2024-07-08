@@ -199,7 +199,7 @@ const CarDetails = () => {
                   <img onClick={() => handleProfile(userId)} className=" cursor-pointer h-full w-full object-cover" src={userImage} alt="" />
                  </div>
                 </div>
-                <div className="pl-2 w-1/2 flex flex-col justify-center">
+                <div ref={ProfileSectionRef} className="pl-2 w-1/2 flex flex-col justify-center">
                  <span className="text-xl">{username}</span>
                 </div>
                </div>

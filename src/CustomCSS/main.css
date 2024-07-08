@@ -101,7 +101,7 @@
       align-items: center;
    }
    #mainMessageBox {
-      position: relative; /* Add this */
+      position: relative; 
       width: 30%;
       margin-left: 210px;
       z-index: 10;

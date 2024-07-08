@@ -8,14 +8,12 @@ const PageSlice = createSlice({
   },
   reducers: {
    setPageNumber: (state, action) => {
-      // Use the payload directly as it should be an array of cars
       return {
          ...state,
          page: action.payload,
       };
    },
    setResultLoading: (state, action) => {
-      // Use the payload directly as it should be an array of cars
       return {
          ...state,
          resultLoading: action.payload,

@@ -8,14 +8,13 @@ import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import { brandNames } from '../Data/Brands';
 import { brandModels } from '../Data/BrandModels';
 import TextField from '@mui/material/TextField';
-import { OutlinedInput, InputLabel, InputAdornment, Button } from '@mui/material';
+import { OutlinedInput, InputLabel, InputAdornment } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import { yearRange } from '../Constants/constants';
 import { CategoryList } from "../Data/Category";
 import '../CustomCSS/Create.css';
 import { driveTrainList } from "../Data/DruveTrain";
-import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import { pollutantClassList } from "../Data/Pollutant";
 import { vehicleOptions } from "../Data/VehicleOptions";
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
@@ -26,7 +25,6 @@ import { getIdToken } from "../functions/getTokenPayload";
 import CircularProgress from '@mui/material/CircularProgress';
 import { generateYearRange , generateYearRangeNew } from "../functions/getTokenPayload";
 import { numberRegex } from "../Regex/Regex";
-import { PriceChange } from "@mui/icons-material";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -47,11 +45,11 @@ const User = () => {
 
    const [images, setImages] = useState([]);
    const [formData, setFormData] = useState({});
-   const [selectedBrand, setSelectedBrand] = useState(""); // Brand
-   const [selectedModel, setSelectedModel] = useState(undefined); // Model
-   const [selectedYear, setSelectedYear] = useState(undefined); // Year
+   const [selectedBrand, setSelectedBrand] = useState(""); 
+   const [selectedModel, setSelectedModel] = useState(undefined); 
+   const [selectedYear, setSelectedYear] = useState(undefined); 
    const [price, setPrice] = useState(undefined);
-   const [milageValue , setMileageValue] = useState(undefined); // Mileage
+   const [milageValue , setMileageValue] = useState(undefined); 
    const [Condition, setCondition] = useState(undefined);
    const [VIN, setVIN] = useState(undefined);
    const [registration, setRegistration] = useState({ month: "", year: "" });
@@ -180,10 +178,9 @@ const User = () => {
      setIsNotRegistered(event.target.checked);
    };
    
-     // Brand
      const handleBrandChange = (event, newValue) => {
        setSelectedBrand(newValue);
-       setSelectedModel(null); // Reset selected model when brand changes
+       setSelectedModel(null); 
        if (newValue) {
          const brandModel = brandModels.find(brand => brand.id === newValue.id);
          setSelectedModel(brandModel ? brandModel.models : []);
@@ -307,7 +304,6 @@ const User = () => {
           setImageError("Image/s is required");
         }
   
-        // Append data to formData
         if (selectedBrand) {
           formData.append('Brand', selectedBrand.title);
           formData.append('BrandModel', selectedBrand.value);
@@ -453,7 +449,7 @@ const User = () => {
    };
 
     const handleDrop = (event) => {
-      event.preventDefault(); // Prevent default behavior
+      event.preventDefault(); 
       setIsDragging(false);
       const files = event.dataTransfer.files;
       handleFileChange({ target: { files } });
@@ -465,7 +461,7 @@ const User = () => {
     };
 
    const handleDragOver = (event) => {
-      event.preventDefault(); // Prevent default behavior
+      event.preventDefault();
       setIsDragging(true);
     };
 

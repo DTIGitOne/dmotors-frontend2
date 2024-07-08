@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { resendCode } from '../API/API';
 import { verifyGmail } from '../API/API';
 import { useNavigate } from 'react-router-dom';
+import '../CustomCSS/index.css';
 
 const VerifyGmail = () => {
   const [loading, setLoading] = useState(false);
@@ -93,7 +94,7 @@ const VerifyGmail = () => {
      ) : (
        <div className="h-screen w-screen bg-slate-100 flex justify-center items-center flex-col gap-2">
          <p className='text-3xl'>Verification</p>
-         <div className='bg-white h-60 w-3/4 rounded-3xl gap-3 flex flex-col p-3'>
+         <div id='verifyGmailBox' className='bg-white h-60 w-3/4 rounded-3xl gap-3 flex flex-col p-3'>
            <p className='text-center'>{codeMessage}</p>
            <TextField
              value={code}

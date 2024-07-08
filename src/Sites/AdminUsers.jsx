@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import MenuBar from "../Components/MenuBar";
-import axios from 'axios';
 import LoaderIcon from "../SVG/LoaderIcon";
 import { AdminUsersCall } from "../API/API";
 import UsersCard from "../Components/UsersCard";

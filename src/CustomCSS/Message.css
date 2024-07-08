@@ -37,7 +37,7 @@
    flex-direction: column;
    align-items: center;
    position: absolute;
-   opacity: 0; /* Start hidden */
+   opacity: 0; 
    visibility: hidden;
 }
 
@@ -48,22 +48,22 @@
   margin-top: 5px;
   font-weight: 500;
   border-radius: 8px; 
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); 
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .overflow-scroll {
-   overflow-y: scroll; /* or auto */
-   -webkit-overflow-scrolling: touch; /* for smooth scrolling on mobile */
-   backface-visibility: hidden; /* This forces hardware acceleration */
-   transform: translateZ(0); /* This forces hardware acceleration */
+   overflow-y: scroll; 
+   -webkit-overflow-scrolling: touch; 
+   backface-visibility: hidden; 
+   transform: translateZ(0); 
  }
 
 .topBackBox {
   background: rgba(255, 255, 255, 0.5); 
   color: rgb(83, 77, 86);
   font-weight: 500;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); 
   border: 1px solid rgba(255, 255, 255, 0.3);
   cursor: default;
 }
@@ -75,7 +75,7 @@
    background: rgba(255, 255, 255, 0.3); 
    color: rgb(83, 77, 86);
    font-weight: 500;
-   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); 
    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
@@ -182,7 +182,7 @@
    transition: opacity 0.5s ease, visibility 0.5s ease;
    opacity: 0;
    visibility: hidden;
-   z-index: 998; /* Adjusted so that it is behind the sidebar */
+   z-index: 998; 
  }
  
  .messsagebarBackdrop.open {

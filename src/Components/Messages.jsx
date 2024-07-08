@@ -10,7 +10,6 @@ import GoBackIcon from '../SVG/GoBackIcon';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setClosing, setExpanded, setOpenMessages, setVisible } from '../Redux/Slices/MessageExpandedSlice';
-import DeleteIcon from '@mui/icons-material/Delete';
 
 const Messages = ({ userId , receiverId}) => {
    const [userProfiles, setUserProfiles] = useState([]);
@@ -46,13 +45,10 @@ const Messages = ({ userId , receiverId}) => {
       const mediaQuery = window.matchMedia("(min-width: 1024px)");
       const handleMediaChange = () => setIsScreenLarge(mediaQuery.matches);
   
-      // Initial check
       handleMediaChange();
   
-      // Add listener
       mediaQuery.addListener(handleMediaChange);
   
-      // Clean up listener on unmount
       return () => {
         mediaQuery.removeListener(handleMediaChange);
       };

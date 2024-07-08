@@ -1,4 +1,3 @@
-import LoaderIcon from "../SVG/LoaderIcon";
 import DMotorsLogo from "../SVG/DMotorsLogo";
 import MenuBar from "../Components/MenuBar"
 import { useRef, useState , useEffect} from "react";
@@ -23,10 +22,6 @@ const About = () => {
 
    const redirectMain = () => {
     navigate(`/Main`);
-  }
-
-  const redirectAbout = () => {
-    navigate(`/About`);
   }
 
   const redirectContact = () => {

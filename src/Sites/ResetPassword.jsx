@@ -4,6 +4,7 @@ import axiosInstance from '../API/axios';
 import { Button, TextField, InputAdornment , IconButton } from '@mui/material';
 import LoaderIcon from '../SVG/LoaderIcon';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import '../CustomCSS/index.css';
 
 const ResetPassword = () => {
     const [newPassword, setNewPassword] = useState('');
@@ -64,7 +65,7 @@ const ResetPassword = () => {
           {loading ? (
             <LoaderIcon />
           ) : (
-            <div className="h-64 w-4/5 bg-white rounded-3xl flex justify-center items-center flex-col">
+            <div id='forgotBoxBox' className="h-64 w-4/5 bg-white rounded-3xl flex justify-center items-center flex-col">
               {error && <p style={{ color: 'red' }}>{error}</p>}
               <form
                 className="h-full w-full flex justify-center items-center flex-col"
