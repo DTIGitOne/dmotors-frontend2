@@ -1,12 +1,12 @@
 ## DEPLOYED APP
 https://drivemotors.netlify.app
 
-## THE BACKEND REPO
-https://github.com/DTIGitOne/deploy-dmotors-backend
-
 (Loading might take 1 minute becouse of the sleeping server status)
 
 (All of the files are visible including the .env file which only stores the url's meant for global use)
+
+## THE BACKEND REPO
+https://github.com/DTIGitOne/deploy-dmotors-backend
 
 ## ABOUT
 This is the frontend for the car market selling website. This is my biggest completed website that i have built. The backend and the frontend have both been created by me, this was my first really big project that i have made and the first project that i have made after 
